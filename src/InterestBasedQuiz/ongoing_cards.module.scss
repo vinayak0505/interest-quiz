@@ -1,0 +1,75 @@
+.card {
+    position: relative;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    background: linear-gradient(180deg, #FFEBA3 0%, #E0FFFF 100%);
+    background-clip: padding-box;
+    padding: 0px 22px;
+    overflow: visible;
+    width: 694px;
+}
+
+.card::after {
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    left: -2px;
+    right: -2px;
+    background: linear-gradient(180deg, #FFA800 0%, #00F0FF 100%);
+    content: '';
+    z-index: -1;
+    border-radius: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: end;
+
+    .image {
+        justify-self: center;
+        width: 442px;
+        margin-left: 40px;
+    }
+
+    .close {
+        z-index: 1;
+        margin-top: 27px;
+        width: 20px;
+        height: 20px;
+        padding: 13px;
+        content: url('./../assets/InterestBasedQuiz/close_icon_black.png');
+        border-radius: 50%;
+        border: 2px solid #3148621F;
+        transition: border 0.5s;
+
+        &:hover {
+            border: 2px solid black;
+        }
+    }
+}
+
+.text {
+    font-family: Anonymous Pro;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 37.44px;
+    text-align: center;
+    color: #314862;
+    margin: 10px 100px;
+}
+
+.subtext {
+    font-family: Anybody;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21.84px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    color: #31486266;
+    margin-bottom: 20px;
+}
+
+.button {
+    color: #314862;
+    margin: 0px 12px;
+}

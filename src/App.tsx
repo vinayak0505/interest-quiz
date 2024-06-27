@@ -1,4 +1,4 @@
-import Cards from "./InterestBasedQuiz/cards";
+import Completed from "./InterestBasedQuiz/completed";
 import JustCompleted from "./InterestBasedQuiz/just_completed";
 import OnGoing from "./InterestBasedQuiz/ongoing";
 import Start from "./InterestBasedQuiz/start";
@@ -28,6 +28,10 @@ const App = () => {
     //     }
     // },[])
 
+    const onExit = () => {
+        // TODO complete on navigate onexit
+    }
+
     const onNext = () => {
         switch (state) {
             case STATE.START:
@@ -45,14 +49,14 @@ const App = () => {
         }
     }
 
-    if(state === STATE.ONGOING) {
-        return <OnGoing onCompleted={onNext}/>
+    if (state === STATE.ONGOING) {
+        return <OnGoing onCompleted={onNext} onExit={onExit} />
     }
-    if(state === STATE.JUSTCOMPLETED) {
+    if (state === STATE.JUSTCOMPLETED) {
         return <JustCompleted onNext={onNext} />
     }
-    if(state === STATE.COMPLETED) {
-        return <Cards />
+    if (state === STATE.COMPLETED) {
+        return <Completed />
     }
     return <Start resume={state === STATE.RESUME} onComplete={onNext} />;
 }

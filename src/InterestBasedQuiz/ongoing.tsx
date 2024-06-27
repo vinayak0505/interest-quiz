@@ -4,7 +4,8 @@ import Styles from "./ongoing.module.scss";
 import { useState } from "react";
 import img from "../assets/InterestBasedQuiz/quiz1.png";
 import InterestQuizButton from "./interest_quiz_button";
-import LeftArrow from "./../assets/InterestBasedQuiz/left_arrow.png";
+import PopupDropDown from "./popup_drop_down";
+import { CopletedCardWeb, PauseCardWeb } from "./ongoing_cards";
 
 enum STATE_ON_GOING {
     EXPLAIN,
@@ -13,14 +14,18 @@ enum STATE_ON_GOING {
     COMPLETED
 }
 
-const OnGoing = ({ onCompleted }: { onCompleted: () => void }) => {
-    const [state, setState] = useState<STATE_ON_GOING>(STATE_ON_GOING.ONGOING);
+const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () => void }) => {
+    const [state, setState] = useState<STATE_ON_GOING>(STATE_ON_GOING.COMPLETED);
     const [percentage, setPercentage] = useState(0);
     const [questions, setQuestions] = useState(InterestBasedQuizTempData.questions)
     const [selected, setSelected] = useState(0);
 
     const onExplain = () => {
         setState(STATE_ON_GOING.EXPLAIN);
+    }
+
+    const onResume = () => {
+        setState(STATE_ON_GOING.ONGOING);
     }
 
     const onSelected = (value: number) => {
@@ -67,6 +72,9 @@ const OnGoing = ({ onCompleted }: { onCompleted: () => void }) => {
                 </div>
             </div>
         </div>
+        {
+            state !== STATE_ON_GOING.ONGOING && <Interuptions currentState={state} onClose={onExit} onResume={onResume} onCompleted={onCompleted} />
+        }
     </div>;
 };
 
@@ -117,5 +125,14 @@ const Navigation = ({ onNext, onPrev, onClose }: { onNext: () => void, onPrev: (
             </div>
         </div>
     </div>;
+}
+
+const Interuptions = ({ currentState, onResume, onClose, onCompleted }: { currentState: STATE_ON_GOING, onResume: () => void, onClose: () => void, onCompleted: () => void }) => {
+    return <div className={Styles.interuptions}>
+        <PopupDropDown>
+            {/* <PauseCardWeb onClose={onClose} onResume={onResume}  /> */}
+            <CopletedCardWeb onCompleted={onCompleted} />
+        </PopupDropDown>
+    </div>
 }
 export default OnGoing;

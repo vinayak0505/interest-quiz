@@ -11,6 +11,7 @@
 }
 
 .border {
+    cursor: pointer;
     --height: 67px;
     --border-size: 2px;
     --border-radius: 94.14deg;
@@ -35,6 +36,7 @@
         align-items: center;
         justify-content: center;
         color: white;
+        gap: 14px;
         font-family: Poppins;
         font-size: 18px;
         background: linear-gradient(90deg, #001E42 0%, var(--start-color) 52.88%, #001E42 100%);
@@ -50,4 +52,24 @@
             --start-color: #266A8F;
         }
     }
+}
+
+.secondary {
+    cursor: pointer;
+    --height: 67px;
+    --border-size: 2px;
+    width: 100%;
+    display: flex;
+    gap: 14px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    height: var(--height);
+    padding: var(--border-size);
+    border-radius: var(--height);
+}
+
+.image {
+    width: 20px;
+    height: 20px;
 }
