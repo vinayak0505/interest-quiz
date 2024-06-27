@@ -14,18 +14,19 @@ enum STATE {
 }
 
 const App = () => {
-    const [state, setState] = useState<STATE>(STATE.START);
+    // const [state, setState] = useState<STATE>(STATE.START);
+    const [state, setState] = useState<STATE>(STATE.ONGOING);
 
-    useEffect(() => {
-        const data = InterestBasedQuizTempData;
-        if (data.state === 'Completed') {
-            setState(STATE.COMPLETED);
-        } else if (data.state === 'Resume') {
-            setState(STATE.RESUME);
-        } else {
-            setState(STATE.START);
-        }
-    },[])
+    // useEffect(() => {
+    //     const data = InterestBasedQuizTempData;
+    //     if (data.state === 'Completed') {
+    //         setState(STATE.COMPLETED);
+    //     } else if (data.state === 'Resume') {
+    //         setState(STATE.RESUME);
+    //     } else {
+    //         setState(STATE.START);
+    //     }
+    // },[])
 
     const onNext = () => {
         switch (state) {
@@ -45,7 +46,7 @@ const App = () => {
     }
 
     if(state === STATE.ONGOING) {
-        return <OnGoing onNext={onNext} />
+        return <OnGoing onCompleted={onNext}/>
     }
     if(state === STATE.JUSTCOMPLETED) {
         return <JustCompleted onNext={onNext} />

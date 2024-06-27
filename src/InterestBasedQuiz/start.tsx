@@ -1,5 +1,6 @@
 import { CSSProperties, useEffect, useState } from "react";
 import Styles from "./start.module.scss";
+import InterestQuizButton from "./interest_quiz_button";
 
 enum STATE_START {
     INIT = 'init',
@@ -77,7 +78,11 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
     return (
         <div className={Styles.container}>
             <div className={Styles.background} style={getBackground()}></div>
-            <div className={Styles.transition}></div>
+            <div className={Styles.transition}>
+                <div style={{width: '300px'}}>
+                    <InterestQuizButton title="Okay, Let me help"/>
+                </div>
+            </div>
         </div>
     );
 };

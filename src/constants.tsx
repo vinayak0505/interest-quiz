@@ -2,15 +2,15 @@ export const InterestBasedQuizTempData = {
     state: null,
     questions: [
         {
-            questions: "What is your favourite food?",
+            questions: "Olly is watching a beautiful sunset, what should he do ?",
             id: 1,
             options: [
                 {
-                    option: "Pizza",
+                    option: "Take a Photo",
                     id: 1
                 },
                 {
-                    option: "Burger",
+                    option: "Enjoy the Sunset",
                     id: 2
                 }
             ]

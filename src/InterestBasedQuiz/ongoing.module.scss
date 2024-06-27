@@ -1,0 +1,283 @@
+.container {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    // background-color: url('./../../stories/assets/InterestBasedQuiz/starry-night-sky.png');
+    background: linear-gradient(180deg, #032245 0%, #0E4F98 100%);
+}
+
+@property --completed {
+    syntax: '<width>';
+    inherits: false;
+    initial-value: 0%;
+}
+
+.background {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: url('./../assets/InterestBasedQuiz/starry-night-sky-planet.png');
+}
+
+.translucent_card {
+    align-self: center;
+    margin-top: auto;
+    bottom: 0;
+    align-items: center;
+    justify-content: end;
+    box-sizing: border-box;
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+    width: 84.5%;
+    gap: 8%;
+    border-radius: 90px 90px 0px 0px;
+    border: 1.5px 1.5px 1.5px 0px;
+    background: #71A7E424;
+    box-shadow: 0px 4px 14.2px 0px #FFFFFF1F inset;
+    backdrop-filter: blur(4px);
+
+    .image {
+        margin-top: -16.9vh;
+        height: 33.8vh;
+    }
+
+    .question {
+        color: white;
+        font-family: Anonymous Pro;
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    .options_container {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        margin-bottom: 13vh;
+
+        .button {
+            width: 38.5%;
+        }
+    }
+
+}
+
+.header {
+    margin-top: 28.5px;
+    display: flex;
+    gap: 17px;
+    justify-content: center;
+    --height: 42px;
+
+    .explain {
+        box-sizing: border-box;
+        border-radius: 50%;
+        border: 1px solid #FFFFFF80;
+        width: var(--height);
+        height: var(--height);
+        padding: 14px;
+        transition: border 0.5s;
+        background-color: transparent;
+        content: url('./../assets/InterestBasedQuiz/explain.png');
+
+        &:hover {
+            border: 1px solid white;
+        }
+    }
+
+    .completed {
+        --completed: 0%;
+        height: 39px;
+        padding: 1px;
+        border-radius: calc(var(--height) / 2);
+        background: linear-gradient(90deg, #14C89A 0%, #FFFFFF var(--completed), #FFFFFF 100%);
+
+        .box {
+            border-radius: calc(var(--height) / 2);
+            height: 100%;
+            box-sizing: border-box;
+            padding: 0px 20px;
+            justify-content: center;
+            align-content: center;
+            background-color: blue;
+            font-family: Russo One;
+            font-size: 14px;
+            font-weight: 400;
+            color: white;
+        }
+    }
+}
+
+.progress_container {
+    display: flex;
+    align-items: center;
+    gap: 19.5px;
+    margin: 0px 15rem;
+
+    .left_icon {
+        height: 57px;
+        content: url('./../assets/InterestBasedQuiz/progress_left_icon.png');
+    }
+
+    .right_icon {
+        height: 32px;
+        content: url('./../assets/InterestBasedQuiz/progress_right_icon.png');
+    }
+
+    .progress {
+        --completed: 25%;
+        --transition-time: 0.5s;
+        overflow: visible;
+        width: 100%;
+        height: 18px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        background: white;
+
+        .progress_bar_border {
+            padding: 3px;
+            box-sizing: border-box;
+            position: absolute;
+            width: var(--completed);
+            transition: width var(--transition-time);
+            height: 100%;
+            border-radius: 9px 0px 0px 9px;
+            background: linear-gradient(180deg, #00FFFF 0%, #00ACFF 100%);
+
+            .progress_bar {
+                width: 100%;
+                height: 100%;
+                border-radius: 9px 0px 0px 9px;
+                background-color: #00ACFF;
+            }
+        }
+
+        .progress_icon {
+            --width: 104px;
+            left: calc(var(--completed) - (var(--width)/2));
+            transition: left var(--transition-time);
+            position: absolute;
+            height: var(--width);
+            width: var(--width);
+            content: url('./../assets/InterestBasedQuiz/progress_icon.png');
+        }
+
+        .line_container {
+            position: absolute;
+            display: flex;
+            height: 100%;
+            justify-content: space-evenly;
+            width: 100%;
+
+            .line {
+                width: 1px;
+                height: 100%;
+                background-color: #BEBDBD;
+            }
+        }
+    }
+}
+
+.navigation {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .close {
+        z-index: 1;
+        align-self: flex-end;
+        justify-content: end;
+        margin: 27px;
+        width: 20px;
+        height: 20px;
+        padding: 13px;
+        content: url('./../assets/InterestBasedQuiz/close_icon.png');
+        border-radius: 50%;
+        border: 1px solid #FFFFFF80;
+        transition: border 0.5s;
+
+        &:hover {
+            border: 1px solid white;
+        }
+    }
+
+    .change {
+        z-index: 1;
+        margin-top: 25vh;
+        display: flex;
+        justify-content: space-between;
+
+        .pre {
+            cursor: pointer;
+            box-sizing: border-box;
+            width: 90px;
+            height: 90px;
+            border: 1px solid #FFFFFF80;
+            background: #001C3C;
+            border-radius: 50%;
+            position: relative;
+            transition: padding 0.5s, translate 0.5s;
+            padding: 16px 0px 16px 30px;
+            translate: -45px;
+
+            .icon {
+                box-sizing: border-box;
+                margin-left: 30px;
+                transition: margin 0.5s;
+                width: 100%;
+                height: 100%;
+                content: url('./../assets/InterestBasedQuiz/left_arrow.png');
+            }
+
+            &:hover {
+                translate: 0px;
+                padding: 24px;
+
+                .icon {
+                    margin-left: 0px;
+                }
+            }
+        }
+
+        .next {
+            cursor: pointer;
+            box-sizing: border-box;
+            width: 90px;
+            height: 90px;
+            border: 1px solid #FFFFFF80;
+            background: #001C3C;
+            border-radius: 50%;
+            position: relative;
+            transition: padding 0.5s, translate 0.5s;
+            padding: 16px 30px 16px 0px;
+            translate: 45px;
+
+            .icon {
+                box-sizing: border-box;
+                margin-left: -30px;
+                transition: margin 0.5s;
+                width: 100%;
+                height: 100%;
+                content: url('./../assets/InterestBasedQuiz/right_arrow.png');
+            }
+
+            &:hover {
+                translate: 0px;
+                padding: 24px;
+
+                .icon {
+                    margin-left: 0px;
+                }
+            }
+        }
+    }
+}
