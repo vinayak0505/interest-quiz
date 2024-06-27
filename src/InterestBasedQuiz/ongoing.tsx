@@ -5,17 +5,16 @@ import { useState } from "react";
 import img from "../assets/InterestBasedQuiz/quiz1.png";
 import InterestQuizButton from "./interest_quiz_button";
 import PopupDropDown from "./popup_drop_down";
-import { CopletedCardWeb, PauseCardWeb } from "./ongoing_cards";
+import { PauseCardWeb } from "./ongoing_cards";
 
 enum STATE_ON_GOING {
     EXPLAIN,
     ONGOING,
     PAUSE,
-    COMPLETED
 }
 
 const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () => void }) => {
-    const [state, setState] = useState<STATE_ON_GOING>(STATE_ON_GOING.COMPLETED);
+    const [state, setState] = useState<STATE_ON_GOING>(STATE_ON_GOING.ONGOING);
     const [percentage, setPercentage] = useState(0);
     const [questions, setQuestions] = useState(InterestBasedQuizTempData.questions)
     const [selected, setSelected] = useState(0);
@@ -127,11 +126,10 @@ const Navigation = ({ onNext, onPrev, onClose }: { onNext: () => void, onPrev: (
     </div>;
 }
 
-const Interuptions = ({ currentState, onResume, onClose, onCompleted }: { currentState: STATE_ON_GOING, onResume: () => void, onClose: () => void, onCompleted: () => void }) => {
+const Interuptions = ({ currentState, onResume, onClose }: { currentState: STATE_ON_GOING, onResume: () => void, onClose: () => void, onCompleted: () => void }) => {
     return <div className={Styles.interuptions}>
         <PopupDropDown>
-            {/* <PauseCardWeb onClose={onClose} onResume={onResume}  /> */}
-            <CopletedCardWeb onCompleted={onCompleted} />
+            <PauseCardWeb onClose={onClose} onResume={onResume} />
         </PopupDropDown>
     </div>
 }
