@@ -58,7 +58,7 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
         setState(STATE_START.START);
     }
 
-    const getBackground = () : customCSSProperties => {
+    const getBackground = (): customCSSProperties => {
         if (state === STATE_START.START || state === STATE_START.RESUME)
             return {
                 "--start-color": "#062C56",
@@ -76,11 +76,13 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
     }
 
     return (
-        <div className={Styles.container}>
-            <div className={Styles.background} style={getBackground()}></div>
-            <div className={Styles.transition}>
-                <div style={{width: '300px'}}>
-                    <InterestQuizButton title="Okay, Let me help"/>
+        <div className={Styles.background} style={getBackground()}>
+            <div className={Styles.star}></div>
+            <div className={Styles.container}>
+                <div className={Styles.transition}>
+                    <div style={{ width: '300px' }}>
+                        <InterestQuizButton title="Okay, Let me help" />
+                    </div>
                 </div>
             </div>
         </div>
