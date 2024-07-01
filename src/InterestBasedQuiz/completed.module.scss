@@ -1,0 +1,132 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-image: url('./../assets/InterestBasedQuiz/completed_background.png');
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 24px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #FFFFFF80;
+    transition: border 0.5s;
+
+    &:hover {
+        border: 1px solid red;
+    }
+}
+
+.ovals {
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 12px;
+
+    .item {
+        content: url('./../assets/InterestBasedQuiz/SimeEllipse.png');
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    .reward {
+        margin: 20px 0px;
+        border-radius: 100px;
+        padding: 1px;
+        background: linear-gradient(90deg, #FFFFFF 0%, #999999 48%, #FFFFFF 100%);
+
+        .item {
+            border-radius: 100px;
+            background: linear-gradient(180deg, #FBB123 0%, #E88B01 100%);
+            padding: 8px 20px;
+            font-family: Roboto;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 21.84px;
+            letter-spacing: 0.06em;
+            color: #314862;
+        }
+    }
+
+    .title {
+        font-family: Poppins;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 53.12px;
+        letter-spacing: 0.025em;
+        color: white;
+
+        &::before {
+            margin-right: 20px;
+            content: "";
+            background-size: 48px 36px;
+            display: inline-block;
+            width: 48px;
+            height: 36px;
+            background-image: url('./../assets/InterestBasedQuiz/two_stars.png');
+        }
+
+        &::after {
+            content: "";
+            margin-left: 20px;
+            background-size: 48px 36px;
+            display: inline-block;
+            width: 48px;
+            height: 36px;
+            background-image: url('./../assets/InterestBasedQuiz/two_stars.png');
+        }
+    }
+
+    .subtitle {
+        margin-top: 14px;
+        font-family: Roboto;
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 21.84px;
+        letter-spacing: 0.06em;
+        color: #FFFFFFB2;
+
+        &::before {
+            vertical-align: middle;
+            content: "";
+            margin-right: 7px;
+            background-size: 30px 30px;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-image: url('./../assets/InterestBasedQuiz/touch.png');
+        }
+    }
+
+}
+
+.flex {
+    flex: 1;
+}
+
+.cards {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 100px;
+}
+
+.button {
+    width: 500px;
+}

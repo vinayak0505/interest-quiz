@@ -1,0 +1,88 @@
+.flip_card {
+    background-color: transparent;
+    width: 300px;
+    height: 332px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flip_card_inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip_card.flipped .flip_card_inner {
+    transform: rotateY(180deg);
+}
+
+.flip_card_front,
+.flip_card_back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.flip_card_front {}
+
+.flip_card_back {
+    transform: rotateY(180deg);
+}
+
+.front_card {}
+
+.back_card {
+    width: 241px;
+    height: 300px;
+    background-color: white;
+    border-radius: 16px;
+    padding: 16px;
+
+    .inner_card {
+        box-sizing: border-box;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 12px;
+        gap: 40px;
+        border-radius: 10px;
+        background: linear-gradient(180deg, rgba(0, 172, 255, 0.9) 18.07%, rgba(0, 89, 132, 0.9) 129.65%);
+
+        .image {
+            border-radius: 50%;
+            padding: 1px;
+            width: 130px;
+            height: 130px;
+            background: linear-gradient(180deg, #FD4848 0%, #7070FF 100%);
+
+            .inner_image {
+                box-sizing: border-box;
+                width: 128px;
+                background-color: white;
+                border-radius: 50%;
+                overflow: visible;
+                height: 128px;
+                padding: 16px;
+            }
+        }
+
+
+        .title {
+            color: white;
+            font-family: Anonymous Pro;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+        }
+    }
+}

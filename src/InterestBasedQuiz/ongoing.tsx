@@ -13,6 +13,7 @@ enum STATE_ON_GOING {
     PAUSE,
 }
 
+
 const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () => void }) => {
     const [state, setState] = useState<STATE_ON_GOING>(STATE_ON_GOING.ONGOING);
     const [percentage, setPercentage] = useState(0);
@@ -114,7 +115,8 @@ const ProgressBar = ({ percentage }: { percentage: number }) => {
 
 const Navigation = ({ onNext, onPrev, onClose }: { onNext: () => void, onPrev: () => void, onClose: () => void }) => {
     return <div className={Styles.navigation}>
-        <div className={Styles.close} onClick={onClose} />
+        <div className={Styles.close} onClick={onClose} >
+        </div>
         <div className={Styles.change}>
             <div className={Styles.pre} onClick={onPrev} >
                 <div className={Styles.icon} />

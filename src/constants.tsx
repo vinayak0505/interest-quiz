@@ -1,3 +1,6 @@
+
+import image from './assets/InterestBasedQuiz/career_image.png';
+
 export const InterestBasedQuizTempData = {
     state: null,
     questions: [
@@ -77,3 +80,22 @@ export const InterestBasedQuizTempData = {
         2: 0,
     }
 }
+
+
+export const RecommendedCarredData = [
+    {
+        title: "Extended Reality (XR) Engineer",
+        link: "",
+        image: image
+    },
+    {
+        title: "Human Computer Interaction (HCI) Expert ",
+        link: "",
+        image: image
+    },
+    {
+        title: "Industrial/Product Designer",
+        link: "",
+        image: image
+    }
+];

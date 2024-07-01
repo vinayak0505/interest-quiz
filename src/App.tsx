@@ -15,7 +15,7 @@ enum STATE {
 
 const App = () => {
     // const [state, setState] = useState<STATE>(STATE.START);
-    const [state, setState] = useState<STATE>(STATE.ONGOING);
+    const [state, setState] = useState<STATE>(STATE.JUSTCOMPLETED);
 
     // useEffect(() => {
     //     const data = InterestBasedQuizTempData;
@@ -30,6 +30,10 @@ const App = () => {
 
     const onExit = () => {
         // TODO complete on navigate onexit
+    }
+
+    const onExplore = () => {
+
     }
 
     const onNext = () => {
@@ -56,7 +60,7 @@ const App = () => {
         return <JustCompleted onNext={onNext} />
     }
     if (state === STATE.COMPLETED) {
-        return <Completed />
+        return <Completed onExplore={onExplore}/>
     }
     return <Start resume={state === STATE.RESUME} onComplete={onNext} />;
 }
