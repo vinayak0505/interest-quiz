@@ -11,13 +11,14 @@
 }
 
 .background {
-    --start-color: #99CEFF;
-    --end-color: #FFE0E0;
+    --start-color: #062C56;
+    --end-color: #85E9FF;
     position: relative;
     overflow: hidden;
     transition: --start-color 1.5s, --end-color 1.5s;
     height: 100vh;
     width: 100vw;
+    animation: background 3s forwards;
     background: linear-gradient(180deg, var(--start-color) 0%, var(--end-color) 100%);
 }
 
@@ -65,5 +66,48 @@
 
     .item {
         content: url('./../assets/InterestBasedQuiz/SimeEllipse.png');
+    }
+}
+
+@keyframes background {
+    0% {
+        --start-color: #99CEFF;
+        --end-color: #FFE0E0;
+    }
+
+    50% {
+        --start-color: #3679B7;
+        --end-color: #FFD0D0;
+    }
+
+    100% {
+        --start-color: #062C56;
+        --end-color: #85E9FF;
+    }
+}
+
+.button{
+    width: 300px;
+}
+
+
+@keyframes button {
+    0% {
+        --start-color: #99CEFF;
+        --end-color: #FFE0E0;
+    }
+    25%{
+        --start-color: #99CEFF;
+        --end-color: #FFE0E0;
+    }
+
+    50% {
+        --start-color: #3679B7;
+        --end-color: #FFD0D0;
+    }
+
+    100% {
+        --start-color: #062C56;
+        --end-color: #85E9FF;
     }
 }

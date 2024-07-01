@@ -4,8 +4,6 @@ import InterestQuizButton from "./interest_quiz_button";
 
 enum STATE_START {
     INIT = 'init',
-    FLOAT = 'float',
-    LOST = 'lost',
     START = 'start',
     RESUME = 'resume',
 }
@@ -21,10 +19,6 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
     const onNext = () => {
         console.log("onNext", state, STATE_START.INIT);
         if (state === STATE_START.INIT) {
-            setState(STATE_START.FLOAT);
-        } else if (state === STATE_START.FLOAT) {
-            setState(STATE_START.LOST);
-        } else if (state === STATE_START.LOST) {
             setState(STATE_START.START);
         } else {
             console.log("else");
@@ -58,31 +52,29 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
         setState(STATE_START.START);
     }
 
-    const getBackground = (): customCSSProperties => {
-        if (state === STATE_START.START || state === STATE_START.RESUME)
-            return {
-                "--start-color": "#062C56",
-                "--end-color": "#85E9FF",
-            }
-        if (state === STATE_START.LOST || state === STATE_START.FLOAT)
-            return {
-                "--start-color": "#3679B7",
-                "--end-color": "#FFD0D0",
-            }
-        return {
-            "--start-color": "#99CEFF",
-            "--end-color": "#FFE0E0",
-        }
-    }
+    // const getBackground = (): customCSSProperties => {
+    //     if (state === STATE_START.START || state === STATE_START.RESUME)
+    //         return {
+    //             "--start-color": "#062C56",
+    //             "--end-color": "#85E9FF",
+    //         }
+    //     if (state === STATE_START.LOST || state === STATE_START.FLOAT)
+    //         return {
+    //             "--start-color": "#3679B7",
+    //             "--end-color": "#FFD0D0",
+    //         }
+    //     return {
+    //         "--start-color": "#99CEFF",
+    //         "--end-color": "#FFE0E0",
+    //     }
+    // }
 
     return (
-        <div className={Styles.background} style={getBackground()}>
+        <div className={Styles.background}>
             <div className={Styles.star}></div>
             <div className={Styles.container}>
-                <div className={Styles.transition}>
-                    <div style={{ width: '300px' }}>
+                <div className={Styles.button}>
                         <InterestQuizButton title="Okay, Let me help" />
-                    </div>
                 </div>
             </div>
         </div>
