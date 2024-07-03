@@ -5,6 +5,8 @@ import Start from "./InterestBasedQuiz/start";
 import React, { useEffect, useState } from "react";
 import { InterestBasedQuizTempData } from "./constants";
 
+import "./App.css";
+
 enum STATE {
     START,
     RESUME,
@@ -15,7 +17,7 @@ enum STATE {
 
 const App = () => {
     // const [state, setState] = useState<STATE>(STATE.START);
-    const [state, setState] = useState<STATE>(STATE.START);
+    const [state, setState] = useState<STATE>(STATE.JUSTCOMPLETED);
 
     // useEffect(() => {
     //     const data = InterestBasedQuizTempData;
@@ -57,7 +59,7 @@ const App = () => {
         return <OnGoing onCompleted={onNext} onExit={onExit} />
     }
     if (state === STATE.JUSTCOMPLETED) {
-        return <JustCompleted onNext={onNext} />
+        return <JustCompleted onUnlock={onNext} />
     }
     if (state === STATE.COMPLETED) {
         return <Completed onExplore={onExplore}/>

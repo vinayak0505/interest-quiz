@@ -1,11 +1,13 @@
 import { InterestBasedQuizTempData } from "../constants";
 import Styles from "./ongoing.module.scss";
 
-import { useState } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 import img from "../assets/InterestBasedQuiz/quiz1.png";
 import InterestQuizButton from "./interest_quiz_button";
 import PopupDropDown from "./popup_drop_down";
 import { PauseCardWeb } from "./ongoing_cards";
+import { ToolTipForQuiz } from "./custom_tooltip";
+import ToolTip1 from './../assets/InterestBasedQuiz/tooltip_0.png';
 
 enum STATE_ON_GOING {
     EXPLAIN,
@@ -13,14 +15,19 @@ enum STATE_ON_GOING {
     PAUSE,
 }
 
+interface customProgressStyle extends CSSProperties {
+    '--completed': String;
+}
 
 const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () => void }) => {
     const [state, setState] = useState<STATE_ON_GOING>(STATE_ON_GOING.ONGOING);
-    const [percentage, setPercentage] = useState(0);
+    const [percentage, setPercentage] = useState(0.0);
     const [questions, setQuestions] = useState(InterestBasedQuizTempData.questions)
     const [selected, setSelected] = useState(0);
+    const [explainItem, setExplainItem] = useState(0);
 
     const onExplain = () => {
+        setExplainItem(0);
         setState(STATE_ON_GOING.EXPLAIN);
     }
 
@@ -33,7 +40,7 @@ const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () 
             onCompleted();
         } else {
             setSelected(selected + 1);
-            setPercentage(percentage + 20);
+            setPercentage(percentage + (100 / (questions.length)));
         }
     }
 
@@ -49,6 +56,8 @@ const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () 
         }
     }
 
+    const child =
+        <Child {...{ percentage, onClose: () => setState(STATE_ON_GOING.ONGOING), questions, selected, onNext: () => setExplainItem(explainItem + 1), explainItem }} />
     return <div className={Styles.container}>
         <Navigation onClose={() => setState(STATE_ON_GOING.PAUSE)} onNext={onNext} onPrev={onPrev} />
         <div className={Styles.background}>
@@ -73,19 +82,20 @@ const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () 
             </div>
         </div>
         {
-            state !== STATE_ON_GOING.ONGOING && <Interuptions currentState={state} onClose={onExit} onResume={onResume} onCompleted={onCompleted} />
+            state !== STATE_ON_GOING.ONGOING && <Interuptions child={child} currentState={state} onClose={onExit} onResume={onResume} onCompleted={onCompleted} />
         }
-    </div>;
+    </div>
 };
 
 
 const Header = ({ completed, onExplain }: { completed: number, onExplain: () => void }) => {
+
     return (
         <div className={Styles.header}>
-            <div className={Styles.completed} >
-                <div className={Styles.box}>
-                    {completed}% completed
-                </div>
+            <div className={Styles.completed}>
+                {/* <div className={Styles.box}> */}
+                {completed}% completed
+                {/* </div> */}
             </div>
             <div className={Styles.explain} onClick={onExplain}>
             </div>
@@ -94,9 +104,11 @@ const Header = ({ completed, onExplain }: { completed: number, onExplain: () => 
 }
 
 const ProgressBar = ({ percentage }: { percentage: number }) => {
+    const style: customProgressStyle = { '--completed': `${percentage}%` };
+
     return <div className={Styles.progress_container}>
         <div className={Styles.left_icon} />
-        <div className={Styles.progress}>
+        <div className={Styles.progress} style={style}>
 
             <div className={Styles.line_container}>
                 <div className={Styles.line} />
@@ -110,7 +122,7 @@ const ProgressBar = ({ percentage }: { percentage: number }) => {
 
         </div>
         <div className={Styles.right_icon} />
-    </div>;
+    </div>
 }
 
 const Navigation = ({ onNext, onPrev, onClose }: { onNext: () => void, onPrev: () => void, onClose: () => void }) => {
@@ -125,14 +137,118 @@ const Navigation = ({ onNext, onPrev, onClose }: { onNext: () => void, onPrev: (
                 <div className={Styles.icon} />
             </div>
         </div>
-    </div>;
-}
-
-const Interuptions = ({ currentState, onResume, onClose }: { currentState: STATE_ON_GOING, onResume: () => void, onClose: () => void, onCompleted: () => void }) => {
-    return <div className={Styles.interuptions}>
-        <PopupDropDown>
-            <PauseCardWeb onClose={onClose} onResume={onResume} />
-        </PopupDropDown>
     </div>
 }
+
+const Interuptions = ({ currentState, onResume, onClose, child }: { currentState: STATE_ON_GOING, onResume: () => void, onClose: () => void, onCompleted: () => void, child: JSX.Element }) => {
+    return <div className={Styles.interuptions}>
+        {
+            currentState === STATE_ON_GOING.PAUSE ?
+                <PopupDropDown>
+                    <PauseCardWeb onClose={onClose} onResume={onResume} />
+                </PopupDropDown>
+                : child
+        }
+
+    </div>
+}
+
+const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }:
+    { percentage: number, onClose: () => void, questions: typeof InterestBasedQuizTempData.questions, selected: number, onNext: () => void, explainItem?: number }) => {
+
+    const showNav = explainItem === 1;
+    const showText = explainItem === 0;
+    const showImage = explainItem === 0 || explainItem === 2;
+    const showExplain = explainItem === 3;
+    const [top, setTop] = useState(0);
+    const [left, setLeft] = useState(0);
+    const textRef = useRef<HTMLDivElement>(null);
+    const progressRef = useRef<HTMLDivElement>(null);
+    const imageRef = useRef<HTMLImageElement>(null);
+    const explainRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        var ref;
+        var width = 0;
+        switch (explainItem) {
+            case 0:
+                ref = textRef;
+                width = 300;
+                break;
+            case 1:
+                ref = progressRef;
+                width = 200;
+                break;
+            case 2:
+                ref = imageRef;
+                width = 200;
+                break;
+            case 3:
+                ref = explainRef;
+                width = 200;
+                break;
+        }
+        if(ref?.current == null) return;
+        const refheight = ref.current.getBoundingClientRect().height + ref.current.getBoundingClientRect().y + 20;
+        const refCenter = ref.current.getBoundingClientRect().x + ref.current.getBoundingClientRect().width / 2 - width;
+        setTop(refheight);
+        setLeft(refCenter);
+    }, [explainItem, textRef])
+
+    const style: customProgressStyle = { '--completed': `${percentage}%`, visibility: showNav ? 'visible' : 'hidden' };
+
+    return <div className={Styles.background} >
+        <div
+        className={Styles.tooltip}
+            style={{
+                top: top + 'px',
+                width: explainItem === 0 ? '600px' : '400px',
+                left: left + 'px',
+            }}>
+            
+            <ToolTipForQuiz image={ToolTip1} onNext={onNext} onClose={onClose} />
+        </div>
+        <div className={Styles.header}>
+            <div className={Styles.completed} style={{ visibility: 'hidden' }}>
+                {percentage}% completed
+            </div>
+            <div className={Styles.explain} ref={explainRef} style={{ visibility: showExplain ? 'visible' : 'hidden' }}>
+            </div>
+        </div >
+        <div className={Styles.progress_container}>
+            <div className={Styles.left_icon} style={{ visibility: 'hidden' }} />
+            <div className={Styles.progress} style={style}>
+
+                <div className={Styles.line_container} >
+                    <div className={Styles.line} />
+                    <div className={Styles.line} />
+                    <div className={Styles.line} />
+                </div>
+                <div className={Styles.progress_bar_border} ref={progressRef} style={{ visibility: showNav ? 'visible' : 'hidden' }}>
+                    <div className={Styles.progress_bar} />
+                </div>
+                <div className={Styles.progress_icon}></div>
+
+            </div>
+            <div className={Styles.right_icon} style={{ visibility: 'hidden' }} />
+        </div>
+        <div className={Styles.translucent_card}>
+            <img className={Styles.image} ref={imageRef} src={img} alt={questions[selected].questions} style={{ visibility: showImage ? 'visible' : 'hidden' }} />
+            <div className={Styles.question} ref={textRef} style={{ visibility: showText ? 'visible' : 'hidden' }}>
+                {questions[selected].questions}
+            </div>
+            <div className={Styles.options_container} style={{ visibility: 'hidden' }}>
+                {
+                    questions[selected].options.map((option) => (
+                        <div className={Styles.button}>
+                            <InterestQuizButton title={questions[selected].options[0].option} onClick={() => {
+                            }} />
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+}
+
 export default OnGoing;

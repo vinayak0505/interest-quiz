@@ -1,14 +1,53 @@
+import { useEffect, useState } from "react";
 import Styles from "./just_completed.module.scss";
+import PopupDropDown from "./popup_drop_down";
+import { CopletedCardWeb } from "./ongoing_cards";
 
-const JustCompleted = ({onNext}: {onNext: () => void}) => {
-    return <div className={Styles.container}>
+enum JustCompletedState {
+    ANIMATE,
+    UNLOCK,
+    DONE
+}
+const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
+    const [state, setState] = useState<JustCompletedState>(JustCompletedState.ANIMATE);
+
+    useEffect(() => {
+        if (state !== JustCompletedState.UNLOCK) return;
+        const timer = setTimeout(() => {
+            setState(JustCompletedState.DONE);
+        }, 2000)
+
+        return () => { clearTimeout(timer) }
+    }, [state]);
+    if (state === JustCompletedState.ANIMATE) {
+        return (
+            <div className={Styles.container}>
+                <div className={Styles.backgrond}></div>
+                <div className={Styles.front}>
+                    <div className={Styles.skip} onClick={() => setState(JustCompletedState.DONE)}>Skip</div>
+                    <div className={Styles.planet}></div>
+                    <div className={Styles.rocket} onAnimationEnd={() => setState(JustCompletedState.UNLOCK)}></div>
+                </div>
+            </div>
+        )
+    }
+
+    return <div className={Styles.container_clear}>
         <div className={Styles.backgrond}></div>
         <div className={Styles.front}>
-            <div className={Styles.skip}>Skip</div>
+            <div className={Styles.caption}>You’ve reached</div>
+            <div className={Styles.heading}>The planet where magic happens</div>
             <div className={Styles.planet}></div>
-            <div className={Styles.rocket}></div>
         </div>
-    </div>;
-}; 
+        {
+            state === JustCompletedState.DONE &&
+            <div className={Styles.interuptions}>
+                <PopupDropDown>
+                    <CopletedCardWeb onCompleted={onUnlock} />
+                </PopupDropDown>
+            </div>
+        }
+    </div>
+};
 
-export default JustCompleted
+export default JustCompleted;

@@ -7,6 +7,8 @@
     padding: 0px 22px;
     overflow: visible;
     width: 694px;
+    display: flex;
+    flex-direction: column;
 }
 
 .card::after {
@@ -21,6 +23,12 @@
     border-radius: 30px;
 }
 
+.image_unlock {
+    align-self: center;
+    justify-self: center;
+    width: 400px;
+}
+
 .header {
     display: flex;
     justify-content: end;
@@ -30,6 +38,8 @@
         width: 442px;
         margin-left: 40px;
     }
+
+    
 
     .close {
         z-index: 1;

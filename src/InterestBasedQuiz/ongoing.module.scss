@@ -44,6 +44,7 @@
     backdrop-filter: blur(4px);
 
     .image {
+        z-index: 4;
         margin-top: -16.9vh;
         height: 33.8vh;
     }
@@ -87,30 +88,38 @@
         content: url('./../assets/InterestBasedQuiz/explain.png');
 
         &:hover {
-            border: 1px solid white;
+            border: 1px solid #00ACFF;
         }
     }
 
     .completed {
-        --completed: 0%;
         height: 39px;
-        padding: 1px;
+        // padding: 1px;
         border-radius: calc(var(--height) / 2);
-        background: linear-gradient(90deg, #14C89A 0%, #FFFFFF var(--completed), #FFFFFF 100%);
+        // background: linear-gradient(90deg, #14C89A 0%, #FFFFFF var(--completed), #FFFFFF 100%);
+        border: 1px solid white;
+        background-color: transparent;
+        padding: 0px 20px;
+        justify-content: center;
+        align-content: center;
+        font-family: Russo One;
+        font-size: 14px;
+        font-weight: 400;
+        color: white;
 
-        .box {
-            border-radius: calc(var(--height) / 2);
-            height: 100%;
-            box-sizing: border-box;
-            padding: 0px 20px;
-            justify-content: center;
-            align-content: center;
-            background-color: blue;
-            font-family: Russo One;
-            font-size: 14px;
-            font-weight: 400;
-            color: white;
-        }
+        // .box {
+        //     border-radius: calc(var(--height) / 2);
+        //     height: 100%;
+        //     box-sizing: border-box;
+        //     padding: 0px 20px;
+        //     justify-content: center;
+        //     align-content: center;
+        //     background-color: blue;
+        //     font-family: Russo One;
+        //     font-size: 14px;
+        //     font-weight: 400;
+        //     color: white;
+        // }
     }
 }
 
@@ -121,7 +130,8 @@
     margin: 0px 15rem;
 
     .left_icon {
-        height: 57px;
+        height: 80px;
+        margin-right: 10px;
         content: url('./../assets/InterestBasedQuiz/progress_left_icon.png');
     }
 
@@ -131,7 +141,7 @@
     }
 
     .progress {
-        --completed: 25%;
+        --completed: 0%;
         --transition-time: 0.5s;
         overflow: visible;
         width: 100%;
@@ -161,7 +171,7 @@
         }
 
         .progress_icon {
-            --width: 104px;
+            --width: 84px;
             left: calc(var(--completed) - (var(--width)/2));
             transition: left var(--transition-time);
             position: absolute;
@@ -216,6 +226,7 @@
         margin-top: 25vh;
         display: flex;
         justify-content: space-between;
+        --navigation-time: 0.2s;
 
         .pre {
             cursor: pointer;
@@ -226,14 +237,14 @@
             background: #001C3C;
             border-radius: 50%;
             position: relative;
-            transition: padding 0.5s, translate 0.5s;
+            transition: padding var(--navigation-time), translate var(--navigation-time), margin-left var(--navigation-time);
             padding: 16px 0px 16px 30px;
             translate: -45px;
 
             .icon {
                 box-sizing: border-box;
                 margin-left: 24px;
-                transition: margin 0.5s;
+                transition: margin var(--navigation-time);
                 width: 100%;
                 height: 100%;
                 content: url('./../assets/InterestBasedQuiz/left_arrow.png');
@@ -242,6 +253,7 @@
             &:hover {
                 translate: 0px;
                 padding: 24px;
+                margin-left: 20px;
 
                 .icon {
                     margin-left: 0px;
@@ -258,14 +270,14 @@
             background: #001C3C;
             border-radius: 50%;
             position: relative;
-            transition: padding 0.5s, translate 0.5s;
+            transition: padding var(--navigation-time), translate var(--navigation-time), margin-right var(--navigation-time);
             padding: 16px 30px 16px 0px;
             translate: 45px;
 
             .icon {
                 box-sizing: border-box;
                 margin-left: -24px;
-                transition: margin 0.5s;
+                transition: margin var(--navigation-time);
                 width: 100%;
                 height: 100%;
                 content: url('./../assets/InterestBasedQuiz/right_arrow.png');
@@ -274,6 +286,7 @@
             &:hover {
                 translate: 0px;
                 padding: 24px;
+                margin-right: 20px;
 
                 .icon {
                     margin-left: 0px;
@@ -284,8 +297,15 @@
 }
 
 .interuptions {
-    z-index: 3;
+    z-index: 1;
     background-color: #000000BF;
     width: 100vw;
     height: 100vh;
+}
+
+
+.tooltip {
+    z-index: 2;
+    position: absolute;
+    transition: top 0.5s, left 0.5s;
 }
