@@ -7,7 +7,10 @@ import InterestQuizButton from "./interest_quiz_button";
 import PopupDropDown from "./popup_drop_down";
 import { PauseCardWeb } from "./ongoing_cards";
 import { ToolTipForQuiz } from "./custom_tooltip";
-import ToolTip1 from './../assets/InterestBasedQuiz/tooltip_0.png';
+import ToolTip0 from './../assets/InterestBasedQuiz/tooltip_0.png';
+import ToolTip1 from './../assets/InterestBasedQuiz/tooltip_1.png';
+import ToolTip2 from './../assets/InterestBasedQuiz/tooltip_2.png';
+import ToolTip3 from './../assets/InterestBasedQuiz/tooltip_3.png';
 
 enum STATE_ON_GOING {
     EXPLAIN,
@@ -162,6 +165,7 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
     const showExplain = explainItem === 3;
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
+    const [image, setImage] = useState(ToolTip0);
     const textRef = useRef<HTMLDivElement>(null);
     const progressRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
@@ -174,21 +178,25 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
             case 0:
                 ref = textRef;
                 width = 300;
+                setImage(ToolTip0);
                 break;
             case 1:
                 ref = progressRef;
                 width = 200;
+                setImage(ToolTip1);
                 break;
             case 2:
                 ref = imageRef;
                 width = 200;
+                setImage(ToolTip2);
                 break;
             case 3:
                 ref = explainRef;
                 width = 200;
+                setImage(ToolTip3);
                 break;
         }
-        if(ref?.current == null) return;
+        if (ref?.current == null) return;
         const refheight = ref.current.getBoundingClientRect().height + ref.current.getBoundingClientRect().y + 20;
         const refCenter = ref.current.getBoundingClientRect().x + ref.current.getBoundingClientRect().width / 2 - width;
         setTop(refheight);
@@ -199,14 +207,14 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
 
     return <div className={Styles.background} >
         <div
-        className={Styles.tooltip}
+            className={Styles.tooltip}
             style={{
                 top: top + 'px',
                 width: explainItem === 0 ? '600px' : '400px',
                 left: left + 'px',
             }}>
-            
-            <ToolTipForQuiz image={ToolTip1} onNext={onNext} onClose={onClose} />
+
+            <ToolTipForQuiz image={image} onNext={onNext} onClose={onClose} showFinishButton={explainItem === 3} />
         </div>
         <div className={Styles.header}>
             <div className={Styles.completed} style={{ visibility: 'hidden' }}>
@@ -215,7 +223,7 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
             <div className={Styles.explain} ref={explainRef} style={{ visibility: showExplain ? 'visible' : 'hidden' }}>
             </div>
         </div >
-        <div className={Styles.progress_container}>
+        <div className={Styles.progress_container} >
             <div className={Styles.left_icon} style={{ visibility: 'hidden' }} />
             <div className={Styles.progress} style={style}>
 
@@ -232,7 +240,7 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
             </div>
             <div className={Styles.right_icon} style={{ visibility: 'hidden' }} />
         </div>
-        <div className={Styles.translucent_card}>
+        <div className={Styles.translucent_card +" "+Styles.invisible_translucent_card} style={{ background: 'transparent' }}>
             <img className={Styles.image} ref={imageRef} src={img} alt={questions[selected].questions} style={{ visibility: showImage ? 'visible' : 'hidden' }} />
             <div className={Styles.question} ref={textRef} style={{ visibility: showText ? 'visible' : 'hidden' }}>
                 {questions[selected].questions}
