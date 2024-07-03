@@ -96,25 +96,28 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
             <div className={Styles.star}></div>
             <div className={Styles.container}>
                 <CustomLottie state={state} animationCompleted={animationCompleted} />
-                {
-                    (state === STATE_START.START || state === STATE_START.RESUME) ?
-                        <>
-                            <div className={Styles.finaltext}>Help yourself by helping Olly reach the planet where magic</div>
-                            <div className={Styles.finaltextgradient + " " + Styles.finaltext}>happens to discover careers based on your interests</div>
-                        </>
-                        :
-                        <>
-                            <div className={Styles.lostHeading + " " + (state === STATE_START.LOST ? Styles.visible : "")}>Olly is lost and confused!</div>
-                            <div className={Styles.lostSub + " " + (state === STATE_START.LOST ? Styles.visible : "")}>Sometimes you might also feel the same while choosing the right career for yourself.</div>
-                        </>
-                }
-                {
-                    (state === STATE_START.START || state === STATE_START.RESUME) &&
-                    <div className={Styles.button}>
-                        <InterestQuizButton title="Start the Journey" image={StartJourneyIcon} onClick={onComplete} />
-                    </div>
-                }
+                <div className={Styles.height}>
+                    {
+                        (state === STATE_START.START || state === STATE_START.RESUME) ?
+                            <>
+                                <div className={Styles.finaltext}>Help yourself by helping Olly reach the planet where magic</div>
+                                <div className={Styles.finaltextgradient + " " + Styles.finaltext}>happens to discover careers based on your interests</div>
+                            </>
+                            :
+                            <>
+                                <div className={Styles.lostHeading + " " + (state === STATE_START.LOST ? Styles.visible : "")}>Olly is lost and confused!</div>
+                                <div className={Styles.lostSub + " " + (state === STATE_START.LOST ? Styles.visible : "")}>Sometimes you might also feel the same while choosing the right career for yourself.</div>
+                            </>
+                    }
+                    {
+                        (state === STATE_START.START || state === STATE_START.RESUME) &&
+                        <div className={Styles.button}>
+                            <InterestQuizButton title="Start the Journey" image={StartJourneyIcon} onClick={onComplete} />
+                        </div>
+                    }
+                </div>
             </div>
+            <div className={Styles.skip} onClick={onSkip}>Skip</div>
         </div>
     );
 };

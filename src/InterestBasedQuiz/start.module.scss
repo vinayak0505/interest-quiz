@@ -27,8 +27,8 @@
     position: absolute;
     z-index: 1;
     opacity: 0.2;
-    // background: white;
-    // background-color: url('./../../stories/assets/InterestBasedQuiz/starry-night-sky.png');
+    background-position: center;
+    background-size: cover;
     background-image: url('./../assets/InterestBasedQuiz/starry-night-sky.png');
 }
 
@@ -141,6 +141,15 @@
     animation: button 1s;
 }
 
+.height {
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 @keyframes button {
     0% {
         opacity: 0;
@@ -153,13 +162,28 @@
     }
 }
 
-.lottie{
+.lottie {
     width: fit-content;
     height: fit-content;
     transition: translate 1.5s;
     translate: 0px 20vh;
 }
 
-.move_lottie{
+.move_lottie {
     translate: 0px 0px;
+}
+
+.skip {
+    z-index: 2;
+    position: relative;
+    cursor: pointer;
+    width: min-content;
+    height: min-content;
+    margin-left: auto;
+    position: relative;
+    right: 27px;
+    top: 27px;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
 }

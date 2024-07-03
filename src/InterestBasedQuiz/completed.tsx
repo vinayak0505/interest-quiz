@@ -18,7 +18,7 @@ const Completed = ({ onExplore }: { onExplore: () => void }) => {
             </div>
             <div className={Styles.title}>Here are the careers fields that fit your Interests</div>
             <div className={Styles.subtitle}>You can tap on any career fields to explore them</div>
-            <div className={Styles.flex}></div>
+            <div className={Styles.flex_half}></div>
             <div className={Styles.cards}>
                 {
                     cardData.map((card, index) => {

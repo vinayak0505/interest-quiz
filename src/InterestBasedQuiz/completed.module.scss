@@ -46,7 +46,7 @@
     height: 100%;
 
     .reward {
-        margin: 20px 0px;
+        margin: 40px 0px 20px 0px;
         border-radius: 100px;
         padding: 1px;
         background: linear-gradient(90deg, #FFFFFF 0%, #999999 48%, #FFFFFF 100%);
@@ -117,6 +117,10 @@
 }
 
 .flex {
+    flex: 2;
+}
+
+.flex_half{
     flex: 1;
 }
 
