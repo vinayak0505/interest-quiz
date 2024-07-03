@@ -1,9 +1,29 @@
-.card {
+
+.outer_card {
     position: relative;
-    border: 2px solid transparent;
+    padding: 2px;
+    background: linear-gradient(180deg, #FFA800 0%, #00F0FF 100%);
+    z-index: -1;
+    height: min-content;
+    width: min-content;
+    overflow: visible;
+    border-radius: 30px;
+    animation: slideIn 0.5s;
+}
+
+@keyframes slideIn {
+    0%{
+        translate: 0px -100vh;
+    }
+
+    100%{
+        translate: 0px 0px;
+    }
+}
+
+.card {
     border-radius: 30px;
     background: linear-gradient(180deg, #FFEBA3 0%, #E0FFFF 100%);
-    background-clip: padding-box;
     padding: 0px 22px;
     overflow: visible;
     width: 694px;
@@ -11,17 +31,6 @@
     flex-direction: column;
 }
 
-.card::after {
-    position: absolute;
-    top: -2px;
-    bottom: -2px;
-    left: -2px;
-    right: -2px;
-    background: linear-gradient(180deg, #FFA800 0%, #00F0FF 100%);
-    content: '';
-    z-index: -1;
-    border-radius: 30px;
-}
 
 .image_unlock {
     align-self: center;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Styles from "./just_completed.module.scss";
 import PopupDropDown from "./popup_drop_down";
-import { CopletedCardWeb } from "./ongoing_cards";
+import { CopletedCardWeb, PauseCardWeb } from "./ongoing_cards";
 
 enum JustCompletedState {
     ANIMATE,
