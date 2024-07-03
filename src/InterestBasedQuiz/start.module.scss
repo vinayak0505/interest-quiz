@@ -26,13 +26,18 @@
     width: 100vw;
     position: absolute;
     z-index: 1;
-    opacity: 0.4;
+    opacity: 0.2;
     // background: white;
     // background-color: url('./../../stories/assets/InterestBasedQuiz/starry-night-sky.png');
     background-image: url('./../assets/InterestBasedQuiz/starry-night-sky.png');
 }
 
 .container {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     height: 100vh;
     width: 100vw;
     position: absolute;
@@ -61,9 +66,100 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-content: center;
     padding: 0px 12px;
 
     .item {
         content: url('./../assets/InterestBasedQuiz/SimeEllipse.png');
     }
+}
+
+.lostHeading {
+    color: white;
+    font-family: Poppins;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 56.44px;
+    letter-spacing: 0.025em;
+    text-align: center;
+    transition: opacity 2s 1.5s;
+    opacity: 0;
+    max-width: 800px;
+}
+
+
+.lostSub {
+    color: white;
+    font-family: Poppins;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 43.16px;
+    letter-spacing: 0.025em;
+    text-align: center;
+    // 3.3 seconds he 8.28s
+    transition: opacity 2s 1.5s;
+    opacity: 0;
+    max-width: 800px;
+}
+
+.visible {
+    opacity: 1;
+}
+
+.finaltext {
+    font-family: Poppins;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 55.8px;
+    letter-spacing: 0.025em;
+    text-align: center;
+    color: white;
+    animation: finaltext 1s;
+}
+
+.finaltextgradient {
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(to right, #FFFFFF 21.5%, #FFC328 100%);
+    background-clip: text;
+}
+
+@keyframes finaltext {
+    0% {
+        opacity: 0;
+        translate: 100vw 0px;
+    }
+
+    100% {
+        opacity: 1;
+        translate: 0;
+    }
+}
+
+.button {
+    margin-top: 50px;
+    width: 600px;
+    animation: button 1s;
+}
+
+@keyframes button {
+    0% {
+        opacity: 0;
+        translate: 0px 20vh;
+    }
+
+    100% {
+        opacity: 1;
+        translate: 0;
+    }
+}
+
+.lottie{
+    width: fit-content;
+    height: fit-content;
+    transition: translate 1.5s;
+    translate: 0px 20vh;
+}
+
+.move_lottie{
+    translate: 0px 0px;
 }
