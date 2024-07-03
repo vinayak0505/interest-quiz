@@ -19,9 +19,9 @@ const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
 
         return () => { clearTimeout(timer) }
     }, [state]);
-    if (state === JustCompletedState.ANIMATE) {
-        return (
-            <div className={Styles.container}>
+    return (
+        <div>
+            <div className={Styles.container} style={{ opacity: state === JustCompletedState.ANIMATE ? 1 : 0 }}>
                 <div className={Styles.backgrond}></div>
                 <div className={Styles.front}>
                     <div className={Styles.skip} onClick={() => setState(JustCompletedState.DONE)}>Skip</div>
@@ -29,25 +29,24 @@ const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
                     <div className={Styles.rocket} onAnimationEnd={() => setState(JustCompletedState.UNLOCK)}></div>
                 </div>
             </div>
-        )
-    }
-
-    return <div className={Styles.container_clear}>
-        <div className={Styles.backgrond}></div>
-        <div className={Styles.front}>
-            <div className={Styles.caption}>You’ve reached</div>
-            <div className={Styles.heading}>The planet where magic happens</div>
-            <div className={Styles.planet}></div>
-        </div>
-        {
-            state === JustCompletedState.DONE &&
-            <div className={Styles.interuptions}>
-                <PopupDropDown>
-                    <CopletedCardWeb onCompleted={onUnlock} />
-                </PopupDropDown>
+            <div className={Styles.container_clear} style={{ opacity: state !== JustCompletedState.ANIMATE ? 1 : 0 }}>
+                <div className={Styles.backgrond}></div>
+                <div className={Styles.front}>
+                    <div className={Styles.caption}>You’ve reached</div>
+                    <div className={Styles.heading}>The planet where magic happens</div>
+                    <div className={Styles.planet}></div>
+                </div>
+                {
+                    state === JustCompletedState.DONE &&
+                    <div className={Styles.interuptions}>
+                        <PopupDropDown>
+                            <CopletedCardWeb onCompleted={onUnlock} />
+                        </PopupDropDown>
+                    </div>
+                }
             </div>
-        }
-    </div>
+        </div>
+    )
 };
 
 export default JustCompleted;
