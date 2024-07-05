@@ -25,7 +25,7 @@ export const CopletedCardWeb = ({ onCompleted }: { onCompleted: () => void }) =>
             <img className={Styles.image_unlock} src={unlockImage} alt="Completed" />
             <div className={Styles.text}>You have helped olly reach the planet where magic happens</div>
             <div className={Styles.subtext}>Click below to unlock your reward</div>
-            <div className={Styles.button}><InterestQuizUnlockButton onClick={onCompleted} title="Unlock career recommendations" /></div>
+            <div className={Styles.button}><InterestQuizUnlockButton onClick={onCompleted} title="Unlock Now!" /></div>
         </ div>
     </div>
 };
