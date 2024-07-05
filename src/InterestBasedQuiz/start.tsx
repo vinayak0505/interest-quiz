@@ -42,8 +42,6 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
     }
 
     const animationCompleted = () => {
-        console.log("alksdjf");
-
         onNext();
     }
 
@@ -54,20 +52,6 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
     //         setState(STATE_START.INIT);
     //     }
     // }, [resume]);
-
-    useEffect(() => {
-        // const data = setInterval(() => {
-        //     if (state === STATE_START.START) {
-        //         clearInterval(data);
-        //         return;
-        //     }
-        //     console.log(state);
-        //     onNext();
-        // }, 2000)
-        // return () => {
-        //     clearInterval(data);
-        // }
-    }, [state]);
 
 
     const onSkip = () => {
@@ -117,7 +101,10 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
                     }
                 </div>
             </div>
-            <div className={Styles.skip} onClick={onSkip}>Skip</div>
+            {   (state !== STATE_START.START && state !== STATE_START.RESUME) ?
+                <div className={Styles.skip} onClick={onSkip}>Skip</div>
+                : <div></div>
+            }
         </div>
     );
 };

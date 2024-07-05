@@ -9,7 +9,7 @@ enum JustCompletedState {
     DONE = 'done'
 }
 const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
-    const [state, setState] = useState<JustCompletedState>(JustCompletedState.DONE);
+    const [state, setState] = useState<JustCompletedState>(JustCompletedState.ANIMATE);
 
     useEffect(() => {
         if (state !== JustCompletedState.UNLOCK) return;

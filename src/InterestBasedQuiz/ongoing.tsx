@@ -23,7 +23,7 @@ interface customProgressStyle extends CSSProperties {
 }
 
 const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () => void }) => {
-    const [state, setState] = useState<STATE_ON_GOING>(STATE_ON_GOING.ONGOING);
+    const [state, setState] = useState<STATE_ON_GOING>(STATE_ON_GOING.EXPLAIN);
     const [percentage, setPercentage] = useState(0.0);
     const [questions, setQuestions] = useState(InterestBasedQuizTempData.questions)
     const [selected, setSelected] = useState(0);
