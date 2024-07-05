@@ -66,8 +66,10 @@
     cursor: pointer;
     --height: 67px;
     --border-size: 2px;
-    --border-radius: 94.14deg;
     --animation-time: 0.5s;
+    --start-color: #001E42;
+    --center-color: #183659;
+    --border-radius: 94.14deg;
     width: 100%;
     display: flex;
     box-sizing: border-box;
@@ -76,8 +78,8 @@
     height: var(--height);
     padding: var(--border-size);
     border-radius: var(--height);
-    background: linear-gradient(var(--border-radius), #00ACFF 40.69%, #006799 65.02%);
-    transition: padding var(--animation-time), --border-radius var(--animation-time), box-shadow var(--animation-time);
+    background: linear-gradient(var(--border-radius), var(--start-color) 40.69%, var(--center-color) 65.02%);
+    transition: padding var(--animation-time), --border-radius var(--animation-time), box-shadow var(--animation-time), --start-color var(--animation-time), --center-color var(--animation-time);
 
 
     .interest_quiz_button {
@@ -106,6 +108,8 @@
 
     &:hover {
         --border-size: 3px;
+        --start-color: #FFB800;
+        --center-color: #7F4E05;
         --border-radius: 262.5deg;
 
         .interest_quiz_button {

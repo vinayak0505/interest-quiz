@@ -4,21 +4,27 @@ import PopupDropDown from "./popup_drop_down";
 import { CopletedCardWeb, PauseCardWeb } from "./ongoing_cards";
 
 enum JustCompletedState {
-    ANIMATE,
-    UNLOCK,
-    DONE
+    ANIMATE = 'animate',
+    UNLOCK = 'unlock',
+    DONE = 'done'
 }
 const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
-    const [state, setState] = useState<JustCompletedState>(JustCompletedState.ANIMATE);
+    const [state, setState] = useState<JustCompletedState>(JustCompletedState.DONE);
 
     useEffect(() => {
         if (state !== JustCompletedState.UNLOCK) return;
+        
         const timer = setTimeout(() => {
             setState(JustCompletedState.DONE);
         }, 2000)
 
         return () => { clearTimeout(timer) }
     }, [state]);
+
+    const onAnimationEnd = () => {
+        if(state !== JustCompletedState.ANIMATE) return;
+        setState(JustCompletedState.UNLOCK);
+    }
     return (
         <div>
             <div className={Styles.container} style={{ opacity: state === JustCompletedState.ANIMATE ? 1 : 0 }}>
@@ -26,7 +32,7 @@ const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
                 <div className={Styles.front}>
                     <div className={Styles.skip} onClick={() => setState(JustCompletedState.DONE)}>Skip</div>
                     <div className={Styles.planet}></div>
-                    <div className={Styles.rocket} onAnimationEnd={() => setState(JustCompletedState.UNLOCK)}></div>
+                    <div className={Styles.rocket} onAnimationEnd={onAnimationEnd}></div>
                 </div>
             </div>
             <div className={Styles.container_clear} style={{ opacity: state !== JustCompletedState.ANIMATE ? 1 : 0 }}>
