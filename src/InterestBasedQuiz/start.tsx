@@ -101,7 +101,11 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
                     }
                 </div>
             </div>
-            {   (state !== STATE_START.START && state !== STATE_START.RESUME) ?
+            <div className={Styles.ovals}>
+                <div className={Styles.item} />
+                <div className={Styles.item} />
+            </div>
+            {(state !== STATE_START.START && state !== STATE_START.RESUME) ?
                 <div className={Styles.skip} onClick={onSkip}>Skip</div>
                 : <div></div>
             }
