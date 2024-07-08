@@ -22,7 +22,7 @@ interface customCSSProperties extends CSSProperties {
     '--end-color': string;
 }
 
-const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void }) => {
+const Start = ({ resume, onComplete, onClose }: { resume: boolean, onComplete: () => void, onClose: () => void }) => {
     const [state, setState] = useState<STATE_START>(STATE_START.HEY);
 
     const onNext = () => {
@@ -75,6 +75,16 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
         }
     }
 
+    const [isMobile, setIsMobile] = useState<boolean>(false);
+    useEffect(() => {
+        function updateSize() {
+            setIsMobile(window.matchMedia("(max-width: 700px)").matches);
+        }
+        window.addEventListener('resize', updateSize);
+        updateSize();
+        return () => window.removeEventListener('resize', updateSize);
+    }, [])
+
     return (
         <div className={Styles.background} style={getBackground()}>
             <div className={Styles.star}></div>
@@ -83,10 +93,18 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
                 <div className={Styles.height}>
                     {
                         (state === STATE_START.START || state === STATE_START.RESUME) ?
-                            <>
-                                <div className={Styles.finaltext}>Help yourself by helping Olly reach the planet where magic</div>
-                                <div className={Styles.finaltextgradient + " " + Styles.finaltext}>happens to discover careers based on your interests</div>
-                            </>
+                            (
+                                isMobile ?
+                                    <>
+                                        <div className={Styles.finaltext}>Help yourself by helping Olly reach the</div>
+                                        <div className={Styles.finaltextgradient2 + " " + Styles.finaltext}>planet where magic happens to discover</div>
+                                        <div className={Styles.finaltextgradient3 + " " + Styles.finaltext}>careers based on your interests</div>
+                                    </> :
+                                    <>
+                                        <div className={Styles.finaltext}>Help yourself by helping Olly reach the planet where magic</div>
+                                        <div className={Styles.finaltextgradient + " " + Styles.finaltext}>happens to discover careers based on your interests</div>
+                                    </>
+                            )
                             :
                             <>
                                 <div className={Styles.lostHeading + " " + (state === STATE_START.LOST ? Styles.visible : "")}>Olly is lost and confused!</div>
@@ -103,11 +121,11 @@ const Start = ({ resume, onComplete }: { resume: boolean, onComplete: () => void
             </div>
             <div className={Styles.ovals}>
                 <div className={Styles.item} />
-                <div className={Styles.item} />
+                {!isMobile && <div className={Styles.item} />}
             </div>
             {(state !== STATE_START.START && state !== STATE_START.RESUME) ?
                 <div className={Styles.skip} onClick={onSkip}>Skip</div>
-                : <div></div>
+                : <div className={Styles.close} onClick={onClose} ></div>
             }
         </div>
     );

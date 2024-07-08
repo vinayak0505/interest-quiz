@@ -44,17 +44,24 @@
 }
 
 .close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 24px;
+    z-index: 2;
+    position: relative;
+    cursor: pointer;
+    margin-left: auto;
+    right: 27px;
+    top: 27px;
+    align-self: flex-end;
+    justify-content: end;
     width: 20px;
     height: 20px;
+    padding: 13px;
+    content: url('./../assets/InterestBasedQuiz/close_icon.png');
     border-radius: 50%;
     border: 1px solid #FFFFFF80;
     transition: border 0.5s;
 
     &:hover {
+        content: url('./../assets/InterestBasedQuiz/close_icon_red.png');
         border: 1px solid red;
     }
 }
@@ -147,6 +154,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
     width: 100%;
 }
 
@@ -186,4 +194,49 @@
     color: white;
     font-size: 15px;
     font-weight: 500;
+}
+
+
+@media screen and (max-width: 700px) {
+    .height {
+        height: 30vh;
+        padding: 0px 20px;
+    }
+    .ovals {
+        justify-content: center;
+    }
+
+    .lostHeading {
+        font-size: 20px;
+        
+    }
+
+    .lostSub {
+        font-size: 16px;
+        line-height: 26.56px;
+    }
+
+    .finaltext {
+        font-size: 16px;
+        line-height: 29.76px;
+    }
+
+    .finaltextgradient2 {
+        -webkit-text-fill-color: transparent;
+        background: linear-gradient(to right, #FFFFFF 50%, #FFC328 100%);
+        background-clip: text;
+
+    }
+
+    .finaltextgradient3 {
+        -webkit-text-fill-color: transparent;
+        background: linear-gradient(to right, #FFFFFF 10%, #FFC328 100%);
+        background-clip: text;
+
+    }
+
+    .button{
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
 }

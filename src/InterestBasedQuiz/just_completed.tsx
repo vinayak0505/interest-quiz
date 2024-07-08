@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Styles from "./just_completed.module.scss";
 import PopupDropDown from "./popup_drop_down";
-import { CopletedCardWeb, PauseCardWeb } from "./ongoing_cards";
+import { CopletedCardMobile, CopletedCardWeb, PauseCardWeb } from "./ongoing_cards";
 
 enum JustCompletedState {
     ANIMATE = 'animate',
@@ -9,17 +9,18 @@ enum JustCompletedState {
     DONE = 'done'
 }
 const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
-    const [state, setState] = useState<JustCompletedState>(JustCompletedState.ANIMATE);
+    // const [state, setState] = useState<JustCompletedState>(JustCompletedState.ANIMATE);
+    const [state, setState] = useState<JustCompletedState>(JustCompletedState.DONE);
 
-    useEffect(() => {
-        if (state !== JustCompletedState.UNLOCK) return;
+    // useEffect(() => {
+    //     if (state !== JustCompletedState.UNLOCK) return;
         
-        const timer = setTimeout(() => {
-            setState(JustCompletedState.DONE);
-        }, 2000)
+    //     const timer = setTimeout(() => {
+    //         setState(JustCompletedState.DONE);
+    //     }, 2000)
 
-        return () => { clearTimeout(timer) }
-    }, [state]);
+    //     return () => { clearTimeout(timer) }
+    // }, [state]);
 
     const onAnimationEnd = () => {
         if(state !== JustCompletedState.ANIMATE) return;
@@ -45,9 +46,10 @@ const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
                 {
                     state === JustCompletedState.DONE &&
                     <div className={Styles.interuptions}>
-                        <PopupDropDown>
-                            <CopletedCardWeb onCompleted={onUnlock} />
-                        </PopupDropDown>
+                        <PopupDropDown 
+                            webChildren={<CopletedCardWeb onCompleted={onUnlock} />}
+                            mobileChildren={<CopletedCardMobile onCompleted={onUnlock} />}
+                        />
                     </div>
                 }
             </div>

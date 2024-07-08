@@ -26,22 +26,28 @@
 }
 
 .translucent_card {
+    border-top: 1.5px solid rgba(153, 153, 153, 0.729);
+    border-left: 1.5px solid rgba(153, 153, 153, 0.729);
+    border-right: 1.5px solid rgba(153, 153, 153, 0.729);
     align-self: center;
     margin-top: auto;
     bottom: 0;
     align-items: center;
-    justify-content: end;
     box-sizing: border-box;
     height: 55%;
     display: flex;
     flex-direction: column;
     width: 84.5%;
-    gap: 8%;
+    gap: 15%;
     border-radius: 90px 90px 0px 0px;
     border: 1.5px 1.5px 1.5px 0px;
     background: #71A7E424;
     box-shadow: 0px 4px 14.2px 0px #FFFFFF1F inset;
     backdrop-filter: blur(4px);
+
+    .change_mobile {
+        visibility: collapse;
+    }
 
     .image {
         z-index: 4;
@@ -54,6 +60,7 @@
         font-family: Anonymous Pro;
         font-size: 26px;
         font-weight: 700;
+        text-align: center;
     }
 
     .options_container {
@@ -69,7 +76,8 @@
 
 }
 
-.invisible_translucent_card{
+.invisible_translucent_card {
+    border: none !important;
     background: transparent;
     box-shadow: none;
 }
@@ -313,4 +321,147 @@
     z-index: 2;
     position: absolute;
     transition: top 0.5s, left 0.5s;
+}
+
+
+@media screen and (max-width: 700px) {
+
+    .container {
+        --padding: 20px;
+    }
+
+    .navigation {
+        --padding: 20px;
+
+        .close {
+            margin: var(--padding);
+            z-index: 1;
+            align-self: flex-end;
+            justify-content: end;
+            margin: 27px;
+            width: 14px;
+            height: 14px;
+            padding: 14px;
+        }
+    }
+
+
+
+    .header {
+        padding-left: var(--padding);
+        justify-content: flex-start;
+    }
+
+    .progress_container {
+        margin: 0px;
+        margin-top: 28px;
+        gap: 10px;
+
+        .left_icon {
+            height: 52px;
+        }
+
+        .right_icon {
+            height: 26px;
+        }
+
+        .progress_icon {
+            --width: 60px !important;
+        }
+    }
+
+    .translucent_card {
+        min-height: min-content;
+        height: 64vh;
+        justify-content: space-between;
+        width: calc(100% - 34px);
+        padding-bottom: 91px;
+        gap: 33px;
+        padding: 0px 27px;
+
+        .change_mobile {
+            visibility: visible;
+            z-index: 1;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            --size: 59px;
+            flex: 1;
+
+            .pre {
+                cursor: pointer;
+                box-sizing: border-box;
+                width: var(--size);
+                height: var(--size);
+                border: 1px solid #FFFFFF80;
+                background: #001C3C;
+                border-radius: 50%;
+
+                .icon {
+                    padding: 18px;
+                    box-sizing: border-box;
+                    width: 100%;
+                    height: 100%;
+                    content: url('./../assets/InterestBasedQuiz/left_arrow.png');
+                }
+            }
+
+            .next {
+                cursor: pointer;
+                box-sizing: border-box;
+                width: var(--size);
+                height: var(--size);
+                border: 1px solid #FFFFFF80;
+                background: #001C3C;
+                border-radius: 50%;
+
+                .icon {
+                    padding: 18px;
+                    box-sizing: border-box;
+                    width: 100%;
+                    height: 100%;
+                    content: url('./../assets/InterestBasedQuiz/right_arrow.png');
+                }
+            }
+        }
+
+        .options_container {
+            flex-direction: column;
+            gap: 33px;
+            margin-bottom: 20px;
+
+            .button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+
+        .image {
+            z-index: 4;
+            margin-top: -6vh;
+            height: auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .question {
+            font-family: Anonymous Pro;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24.48px;
+        }
+    }
+
+    .navigation {
+        .change {
+            visibility: collapse;
+        }
+    }
+
+    .tooltip {
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

@@ -5,12 +5,16 @@ import { CSSProperties, useEffect, useRef, useState } from "react";
 import img from "../assets/InterestBasedQuiz/quiz1.png";
 import InterestQuizButton from "./interest_quiz_button";
 import PopupDropDown from "./popup_drop_down";
-import { PauseCardWeb } from "./ongoing_cards";
+import { PauseCardMobile, PauseCardWeb } from "./ongoing_cards";
 import { ToolTipForQuiz } from "./custom_tooltip";
 import ToolTip0 from './../assets/InterestBasedQuiz/tooltip_0.png';
+import ToolTip0Mobile from './../assets/InterestBasedQuiz/tooltip_0_mobile.png';
 import ToolTip1 from './../assets/InterestBasedQuiz/tooltip_1.png';
+import ToolTip1Mobile from './../assets/InterestBasedQuiz/tooltip_1_mobile.png';
 import ToolTip2 from './../assets/InterestBasedQuiz/tooltip_2.png';
+import ToolTip2Mobile from './../assets/InterestBasedQuiz/tooltip_2_mobile.png';
 import ToolTip3 from './../assets/InterestBasedQuiz/tooltip_3.png';
+import ToolTip3Mobile from './../assets/InterestBasedQuiz/tooltip_3_mobile.png';
 
 enum STATE_ON_GOING {
     EXPLAIN,
@@ -71,7 +75,7 @@ const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () 
                 <div className={Styles.question}>
                     {questions[selected].questions}
                 </div>
-                <div className={Styles.options_container}>
+                <div className={Styles.options_container} key={selected}>
                     {
                         questions[selected].options.map((option) => (
                             <div className={Styles.button}>
@@ -81,6 +85,14 @@ const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () 
                             </div>
                         ))
                     }
+                </div>
+                <div className={Styles.change_mobile}>
+                    <div className={Styles.pre} onClick={onPrev} >
+                        <div className={Styles.icon} />
+                    </div>
+                    <div className={Styles.next} onClick={onNext} >
+                        <div className={Styles.icon} />
+                    </div>
                 </div>
             </div>
         </div>
@@ -147,9 +159,14 @@ const Interuptions = ({ currentState, onResume, onClose, child }: { currentState
     return <div className={Styles.interuptions}>
         {
             currentState === STATE_ON_GOING.PAUSE ?
-                <PopupDropDown>
-                    <PauseCardWeb onClose={onClose} onResume={onResume} />
-                </PopupDropDown>
+                <PopupDropDown
+                    webChildren={
+                        <PauseCardWeb onClose={onClose} onResume={onResume} />
+                    }
+                    mobileChildren={
+                        <PauseCardMobile onClose={onClose} onResume={onResume} />
+                    }
+                />
                 : child
         }
 
@@ -167,9 +184,20 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
     const [left, setLeft] = useState(0);
     const [image, setImage] = useState(ToolTip0);
     const textRef = useRef<HTMLDivElement>(null);
+    const rocketRef = useRef<HTMLDivElement>(null);
     const progressRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
     const explainRef = useRef<HTMLDivElement>(null);
+
+    const [isMobile, setIsMobile] = useState<boolean>(false);
+    useEffect(() => {
+        function updateSize() {
+            setIsMobile(window.matchMedia("(max-width: 700px)").matches);
+        }
+        window.addEventListener('resize', updateSize);
+        updateSize();
+        return () => window.removeEventListener('resize', updateSize);
+    }, [])
 
     useEffect(() => {
         var ref;
@@ -178,30 +206,51 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
             case 0:
                 ref = textRef;
                 width = 300;
-                setImage(ToolTip0);
+                if(isMobile){
+                    setImage(ToolTip0Mobile);
+                }else {
+                    setImage(ToolTip0);
+                }
                 break;
             case 1:
-                ref = progressRef;
                 width = 200;
-                setImage(ToolTip1);
+                if(isMobile){
+                    ref=progressRef;
+                    setImage(ToolTip1Mobile);
+                }else {
+                    ref = rocketRef;
+                    setImage(ToolTip1);
+                }
                 break;
             case 2:
                 ref = imageRef;
                 width = 200;
-                setImage(ToolTip2);
+                if(isMobile){
+                    setImage(ToolTip2Mobile);
+                }else {
+                    setImage(ToolTip2);
+                }
                 break;
             case 3:
                 ref = explainRef;
                 width = 200;
-                setImage(ToolTip3);
+                if(isMobile){
+                    setImage(ToolTip3Mobile);
+                }else {
+                    setImage(ToolTip3);
+                }
                 break;
         }
         if (ref?.current == null) return;
         const refheight = ref.current.getBoundingClientRect().height + ref.current.getBoundingClientRect().y + 20;
         const refCenter = ref.current.getBoundingClientRect().x + ref.current.getBoundingClientRect().width / 2 - width;
         setTop(refheight);
-        setLeft(refCenter);
-    }, [explainItem, textRef])
+        if (isMobile) {
+            setLeft(0)
+        }else{
+            setLeft(refCenter);
+        }
+    }, [explainItem, textRef, isMobile])
 
     const style: customProgressStyle = { '--completed': `${percentage}%`, visibility: showNav ? 'visible' : 'hidden' };
 
@@ -210,7 +259,7 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
             className={Styles.tooltip}
             style={{
                 top: top + 'px',
-                width: explainItem === 0 ? '600px' : '400px',
+                width: isMobile ? ('max-content') : (explainItem === 0 ? '600px' : '400px'),
                 left: left + 'px',
             }}>
 
@@ -225,22 +274,22 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
         </div >
         <div className={Styles.progress_container} >
             <div className={Styles.left_icon} style={{ visibility: 'hidden' }} />
-            <div className={Styles.progress} style={style}>
+            <div className={Styles.progress} ref={progressRef} style={style}>
 
                 <div className={Styles.line_container} >
                     <div className={Styles.line} />
                     <div className={Styles.line} />
                     <div className={Styles.line} />
                 </div>
-                <div className={Styles.progress_bar_border} ref={progressRef} style={{ visibility: showNav ? 'visible' : 'hidden' }}>
+                <div className={Styles.progress_bar_border} style={{ visibility: showNav ? 'visible' : 'hidden' }}>
                     <div className={Styles.progress_bar} />
                 </div>
-                <div className={Styles.progress_icon}></div>
+                <div className={Styles.progress_icon} ref={rocketRef} ></div>
 
             </div>
             <div className={Styles.right_icon} style={{ visibility: 'hidden' }} />
         </div>
-        <div className={Styles.translucent_card +" "+Styles.invisible_translucent_card} style={{ background: 'transparent' }}>
+        <div className={Styles.translucent_card + " " + Styles.invisible_translucent_card} style={{ background: 'transparent' }}>
             <img className={Styles.image} ref={imageRef} src={img} alt={questions[selected].questions} style={{ visibility: showImage ? 'visible' : 'hidden' }} />
             <div className={Styles.question} ref={textRef} style={{ visibility: showText ? 'visible' : 'hidden' }}>
                 {questions[selected].questions}
@@ -249,11 +298,18 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
                 {
                     questions[selected].options.map((option) => (
                         <div className={Styles.button}>
-                            <InterestQuizButton title={questions[selected].options[0].option} onClick={() => {
-                            }} />
+                            <InterestQuizButton title={questions[selected].options[0].option} onClick={() => { }} />
                         </div>
                     ))
                 }
+            </div>
+            <div className={Styles.change_mobile} style={{ visibility: 'hidden' }} >
+                <div className={Styles.pre}  >
+                    <div className={Styles.icon} />
+                </div>
+                <div className={Styles.next} >
+                    <div className={Styles.icon} />
+                </div>
             </div>
         </div>
     </div>

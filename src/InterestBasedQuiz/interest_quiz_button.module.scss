@@ -151,3 +151,12 @@
     width: 20px;
     height: 20px;
 }
+
+@media screen and (max-width: 700px) {
+    .border{
+        --height: 52px;
+        .interest_quiz_button{
+            font-size: 14px;
+        }
+    }
+}

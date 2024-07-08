@@ -16,8 +16,8 @@ enum STATE {
 }
 
 const App = () => {
-    const [state, setState] = useState<STATE>(STATE.START);
-    // const [state, setState] = useState<STATE>(STATE.JUSTCOMPLETED);
+    // const [state, setState] = useState<STATE>(STATE.START);
+    const [state, setState] = useState<STATE>(STATE.JUSTCOMPLETED);
 
     // useEffect(() => {
     //     const data = InterestBasedQuizTempData;
@@ -64,7 +64,7 @@ const App = () => {
     if (state === STATE.COMPLETED) {
         return <Completed onExplore={onExplore}/>
     }
-    return <Start resume={state === STATE.RESUME} onComplete={onNext} />;
+    return <Start resume={state === STATE.RESUME} onComplete={onNext} onClose={onExit}/>;
 }
 
 export default App;

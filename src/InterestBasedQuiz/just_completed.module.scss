@@ -146,3 +146,85 @@
     width: 100vw;
     height: 100vh;
 }
+
+@media screen and (max-width: 700px) {
+
+
+    .container {
+        .front {
+
+            .planet {
+                width: 100vw;
+                height: auto;
+                left: 0px;
+                z-index: 1;
+                top: 20vh;
+            }
+
+            .rocket {
+                z-index: 1;
+                right: 0;
+                bottom: 0;
+                margin-top: auto;
+                margin-left: auto;
+                position: absolute;
+                width: 90vw;
+                height: auto;
+                animation-fill-mode: forwards;
+                content: url('./../assets/InterestBasedQuiz/rocket_mobile.png');
+                translate: 2.5% 2.5%;
+                scale: 1;
+                animation: rockets_mobile 1.5s;
+                animation-fill-mode: forwards;
+                translate: 0px 0px;
+                scale: 1;
+            }
+        }
+    }
+
+    .container_clear {
+        .front {
+            .planet {
+                width: 100vw;
+                height: auto;
+            }
+
+            .caption {
+                font-family: Poppins;
+                font-size: 14px;
+                font-weight: 300;
+                line-height: 23.24px;
+                letter-spacing: 0.04em;
+            }
+
+            .heading {
+                margin-top: 20px;
+                font-family: Titan One;
+                font-size: 32px;
+                font-weight: 400;
+                line-height: 53.12px;
+                letter-spacing: 0.04em;
+                text-align: center;
+                stroke: 0.5px solid #ffffff70;
+                text-shadow: #ffffff75 0.4px 1px 2px;
+            }
+        }
+    }
+}
+
+
+@keyframes rockets_mobile {
+    0% {
+        translate: 25% 50%;
+        scale: 1.3;
+    }
+
+    70% {
+        translate: 0px 0px;
+        scale: 1;
+    }
+
+    100% {
+        translate: 1.5% 1.5%;
+    }
+}
