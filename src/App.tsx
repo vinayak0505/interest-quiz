@@ -16,8 +16,8 @@ enum STATE {
 }
 
 const App = () => {
-    // const [state, setState] = useState<STATE>(STATE.START);
-    const [state, setState] = useState<STATE>(STATE.JUSTCOMPLETED);
+    const [state, setState] = useState<STATE>(STATE.START);
+    // const [state, setState] = useState<STATE>(STATE.ONGOING);
 
     // useEffect(() => {
     //     const data = InterestBasedQuizTempData;

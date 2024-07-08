@@ -21,7 +21,6 @@
 
 .flip_card_front,
 .flip_card_back {
-    position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
@@ -83,6 +82,45 @@
             font-size: 18px;
             font-weight: 700;
             text-align: center;
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+    .flip_card{
+        height: min-content;
+        width: 100%;
+    }
+    .flip_card_front,
+    .flip_card_back {
+        height: min-content;
+    }
+
+    .back_card {
+        height: min-content;
+        padding: 10px;
+        width: 100%;
+
+        .inner_card {
+            height: min-content;
+            flex-direction: row;
+            gap: 20px;
+
+            .title{
+                text-align: left;
+                font-size: 16px;
+            }
+
+            .image {
+                width: 56px;
+                height: 56px;
+
+                .inner_image {
+                    width: 54px;
+                    height: 54px;
+                }
+            }
         }
     }
 }

@@ -71,25 +71,19 @@
         line-height: 53.12px;
         letter-spacing: 0.025em;
         color: white;
+        display: flex;
+        gap: 20px;
 
-        &::before {
-            margin-right: 20px;
-            content: "";
-            background-size: 48px 36px;
-            display: inline-block;
+        .before {
             width: 48px;
             height: 36px;
-            background-image: url('./../assets/InterestBasedQuiz/two_stars.png');
+            content: url('./../assets/InterestBasedQuiz/two_stars.png');
         }
 
-        &::after {
-            content: "";
-            margin-left: 20px;
-            background-size: 48px 36px;
-            display: inline-block;
+        .after {
             width: 48px;
             height: 36px;
-            background-image: url('./../assets/InterestBasedQuiz/two_stars.png');
+            content: url('./../assets/InterestBasedQuiz/two_stars.png');
         }
     }
 
@@ -120,7 +114,7 @@
     flex: 2;
 }
 
-.flex_half{
+.flex_half {
     flex: 1;
 }
 
@@ -133,4 +127,65 @@
 
 .button {
     width: 500px;
+}
+
+
+@media screen and (max-width: 700px) {
+
+    .content {
+        box-sizing: border-box;
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+
+        .title {
+            font-family: Poppins;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 26.56px;
+            letter-spacing: 0.025em;
+            text-align: center;
+            gap: 16px;
+
+            .before {
+                width: 30px;
+                height: 24px;
+            }
+
+            .after {
+                width: 30px;
+                height: 24px;
+            }
+        }
+
+        .subtitle {
+            margin-top: 14px;
+            color: #FFFFFFB2;
+            font-size: 12px;
+            font-weight: 300;
+            line-height: 18.72px;
+            letter-spacing: 0.06em;
+            text-align: center;
+
+            &::before {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        .cards {
+            width: 100%;
+            gap: 20px;
+            flex-direction: column;
+        }
+
+        .button {
+            width: 100%;
+        }
+
+    }
+
+    .ovals {
+        justify-content: center;
+    }
 }

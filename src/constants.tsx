@@ -5,7 +5,7 @@ export const InterestBasedQuizTempData = {
     state: null,
     questions: [
         {
-            questions: "Olly is watching a beautiful sunset, what should he do ?",
+            questions: "Olly's friend is having trouble with his math problem. What should he do about it?",
             id: 1,
             options: [
                 {

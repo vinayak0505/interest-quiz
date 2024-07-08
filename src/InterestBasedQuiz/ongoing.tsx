@@ -190,6 +190,7 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
     const explainRef = useRef<HTMLDivElement>(null);
 
     const [isMobile, setIsMobile] = useState<boolean>(false);
+    const [renderAgain, setRenderAgain] = useState<boolean>(false);
     useEffect(() => {
         function updateSize() {
             setIsMobile(window.matchMedia("(max-width: 700px)").matches);
@@ -250,7 +251,7 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
         }else{
             setLeft(refCenter);
         }
-    }, [explainItem, textRef, isMobile])
+    }, [explainItem,imageRef,explainRef, textRef, isMobile, renderAgain])
 
     const style: customProgressStyle = { '--completed': `${percentage}%`, visibility: showNav ? 'visible' : 'hidden' };
 
@@ -290,7 +291,7 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
             <div className={Styles.right_icon} style={{ visibility: 'hidden' }} />
         </div>
         <div className={Styles.translucent_card + " " + Styles.invisible_translucent_card} style={{ background: 'transparent' }}>
-            <img className={Styles.image} ref={imageRef} src={img} alt={questions[selected].questions} style={{ visibility: showImage ? 'visible' : 'hidden' }} />
+            <img className={Styles.image} onLoad={() => { setRenderAgain(!renderAgain) }} ref={imageRef} src={img} alt={questions[selected].questions} style={{ visibility: showImage ? 'visible' : 'hidden' }} />
             <div className={Styles.question} ref={textRef} style={{ visibility: showText ? 'visible' : 'hidden' }}>
                 {questions[selected].questions}
             </div>

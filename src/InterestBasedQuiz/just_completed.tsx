@@ -9,18 +9,17 @@ enum JustCompletedState {
     DONE = 'done'
 }
 const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
-    // const [state, setState] = useState<JustCompletedState>(JustCompletedState.ANIMATE);
-    const [state, setState] = useState<JustCompletedState>(JustCompletedState.DONE);
+    const [state, setState] = useState<JustCompletedState>(JustCompletedState.ANIMATE);
 
-    // useEffect(() => {
-    //     if (state !== JustCompletedState.UNLOCK) return;
+    useEffect(() => {
+        if (state !== JustCompletedState.UNLOCK) return;
         
-    //     const timer = setTimeout(() => {
-    //         setState(JustCompletedState.DONE);
-    //     }, 2000)
+        const timer = setTimeout(() => {
+            setState(JustCompletedState.DONE);
+        }, 2000)
 
-    //     return () => { clearTimeout(timer) }
-    // }, [state]);
+        return () => { clearTimeout(timer) }
+    }, [state]);
 
     const onAnimationEnd = () => {
         if(state !== JustCompletedState.ANIMATE) return;

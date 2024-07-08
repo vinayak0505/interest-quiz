@@ -153,9 +153,26 @@
 }
 
 @media screen and (max-width: 700px) {
-    .border{
+    .border {
         --height: 52px;
-        .interest_quiz_button{
+
+        .interest_quiz_button {
+            font-size: 14px;
+        }
+    }
+
+    .unlock_border {
+        --height: 52px;
+
+        .interest_quiz_button {
+            font-size: 14px;
+        }
+    }
+
+    .secondary {
+        --height: 52px;
+
+        .interest_quiz_button {
             font-size: 14px;
         }
     }

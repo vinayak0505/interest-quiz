@@ -28,9 +28,9 @@ const FlipCard = ({ frontend, backend }: { frontend: JSX.Element, backend: JSX.E
     return (
         <div className={`${Styles.flip_card} ${flipped ? Styles.flipped : ''}`} onClick={handleClick}>
             <div className={Styles.flip_card_inner}>
-                <div className={Styles.flip_card_front}>
+                {/* <div className={Styles.flip_card_front}>
                     {frontend}
-                </div>
+                </div> */}
                 <div className={Styles.flip_card_back}>
                     {backend}
                 </div>
