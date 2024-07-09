@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import Styles from "./just_completed.module.scss";
 import PopupDropDown from "./popup_drop_down";
 import { CopletedCardMobile, CopletedCardWeb, PauseCardWeb } from "./ongoing_cards";
+import rocket_mobile from '../assets/InterestBasedQuiz/rocket_mobile.png';
+import rocket from './../assets/InterestBasedQuiz/rocket.png';
+
 
 enum JustCompletedState {
     ANIMATE = 'animate',
@@ -25,6 +28,23 @@ const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
         if(state !== JustCompletedState.ANIMATE) return;
         setState(JustCompletedState.UNLOCK);
     }
+
+    const [animate, setAnimate] = useState(false);
+    const onLoad = () =>{
+        
+        setAnimate(true);
+    }
+
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        function updateSize() {
+            setIsMobile(window.matchMedia("(max-width: 700px)").matches);
+        }
+        window.addEventListener('resize', updateSize);
+        updateSize();
+        return () => window.removeEventListener('resize', updateSize);
+    }, [])
+
     return (
         <div>
             <div className={Styles.container} style={{ opacity: state === JustCompletedState.ANIMATE ? 1 : 0 }}>
@@ -32,7 +52,7 @@ const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
                 <div className={Styles.front}>
                     <div className={Styles.skip} onClick={() => setState(JustCompletedState.DONE)}>Skip</div>
                     <div className={Styles.planet}></div>
-                    <div className={Styles.rocket} onAnimationEnd={onAnimationEnd}></div>
+                    <img className={Styles.rocket + " " + (animate ? Styles.start_animate : "")} src={isMobile ? rocket_mobile : rocket} onLoad={onLoad} onAnimationEnd={onAnimationEnd} alt="rocket"></img>
                 </div>
             </div>
             <div className={Styles.container_clear} style={{ opacity: state !== JustCompletedState.ANIMATE ? 1 : 0 }}>

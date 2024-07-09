@@ -54,10 +54,8 @@
             width: 50vw;
             height: auto;
             animation-fill-mode: forwards;
-            content: url('./../assets/InterestBasedQuiz/rocket.png');
             translate: 2.5% 2.5%;
             scale: 1;
-            animation: rockets 1.5s;
             animation-fill-mode: forwards;
             translate: 0px 0px;
             scale: 1;
@@ -147,8 +145,15 @@
     height: 100vh;
 }
 
+.start_animate {
+    animation: rockets 1.5s;
+}
+
 @media screen and (max-width: 700px) {
 
+    .start_animate {
+        animation: rockets_mobile 1.5s;
+    }
 
     .container {
         .front {
@@ -171,10 +176,8 @@
                 width: 90vw;
                 height: auto;
                 animation-fill-mode: forwards;
-                content: url('./../assets/InterestBasedQuiz/rocket_mobile.png');
                 translate: 2.5% 2.5%;
                 scale: 1;
-                animation: rockets_mobile 1.5s;
                 animation-fill-mode: forwards;
                 translate: 0px 0px;
                 scale: 1;
@@ -211,7 +214,6 @@
         }
     }
 }
-
 
 @keyframes rockets_mobile {
     0% {
