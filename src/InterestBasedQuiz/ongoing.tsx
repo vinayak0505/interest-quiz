@@ -192,10 +192,12 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
     const explainRef = useRef<HTMLDivElement>(null);
 
     const [isMobile, setIsMobile] = useState<boolean>(false);
+    const [height, setHeight] = useState(window.innerHeight);
     const [renderAgain, setRenderAgain] = useState<boolean>(false);
     useEffect(() => {
         function updateSize() {
             setIsMobile(window.matchMedia("(max-width: 700px)").matches);
+            setHeight(window.innerHeight)
         }
         window.addEventListener('resize', updateSize);
         updateSize();
@@ -245,19 +247,23 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
                 break;
         }
         if (ref?.current == null) return;
-        const refheight = ref.current.getBoundingClientRect().height + ref.current.getBoundingClientRect().y + 20;
-        const refCenter = ref.current.getBoundingClientRect().x + ref.current.getBoundingClientRect().width / 2 - width;
-        setTop(refheight);
+        let reftop = ref.current.getBoundingClientRect().height + ref.current.getBoundingClientRect().y + 20;
+        const refCenter = ref.current.getBoundingClientRect().x + ref.current.getBoundingClientRect().width / 2 - width
+        const maxTop = window.innerHeight - 200;
+        if (reftop > maxTop) {
+            reftop = maxTop;
+        }
+        setTop(reftop);
         if (isMobile) {
             setLeft(0)
         } else {
             setLeft(refCenter);
         }
-    }, [explainItem, imageRef, explainRef, textRef, isMobile, renderAgain])
+    }, [explainItem, imageRef, explainRef, textRef, isMobile, renderAgain, height])
 
     const style: customProgressStyle = { '--completed': `${percentage}%`, visibility: showNav ? 'visible' : 'hidden' };
 
-    return <div className={Styles.background} >
+    return <div className={Styles.background} style={{backgroundImage: 'none'}} >
         <div
             className={Styles.tooltip}
             style={{

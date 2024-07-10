@@ -5,7 +5,6 @@ import { CopletedCardMobile, CopletedCardWeb, PauseCardWeb } from "./ongoing_car
 import rocket_mobile from '../assets/InterestBasedQuiz/rocket_mobile.png';
 import rocket from './../assets/InterestBasedQuiz/rocket.png';
 
-
 enum JustCompletedState {
     ANIMATE = 'animate',
     UNLOCK = 'unlock',

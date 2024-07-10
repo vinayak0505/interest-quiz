@@ -79,6 +79,7 @@
     border: none !important;
     background: transparent;
     box-shadow: none;
+    backdrop-filter: none !important;
 }
 
 .header {
@@ -317,7 +318,7 @@
 
 
 .tooltip {
-    z-index: 2;
+    z-index: 5;
     position: absolute;
     transition: top 0.5s, left 0.5s;
 }
