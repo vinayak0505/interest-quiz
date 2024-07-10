@@ -63,19 +63,19 @@ const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () 
         }
     }
 
-    const child =
-        <Child {...{ percentage, onClose: () => setState(STATE_ON_GOING.ONGOING), questions, selected, onNext: () => setExplainItem(explainItem + 1), explainItem }} />
+    const explainChild =
+        <ExplainChild {...{ percentage, onClose: () => setState(STATE_ON_GOING.ONGOING), questions, selected, onNext: () => setExplainItem(explainItem + 1), explainItem }} />
     return <div className={Styles.container}>
         <Navigation onClose={() => setState(STATE_ON_GOING.PAUSE)} onNext={onNext} onPrev={onPrev} />
         <div className={Styles.background}>
             <Header completed={percentage} onExplain={onExplain} />
             <ProgressBar percentage={percentage} />
             <div className={Styles.translucent_card}>
-                <img className={Styles.image} src={img} alt={questions[selected].questions} />
-                <div className={Styles.question}>
+                <img className={Styles.image} src={img} key={selected + "image"} alt={questions[selected].questions} />
+                <div className={Styles.question} key={selected + "question"}>
                     {questions[selected].questions}
                 </div>
-                <div className={Styles.options_container} key={selected}>
+                <div className={Styles.options_container} key={selected + "options"}>
                     {
                         questions[selected].options.map((option) => (
                             <div className={Styles.button}>
@@ -94,10 +94,12 @@ const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () 
                         <div className={Styles.icon} />
                     </div>
                 </div>
+                {/* extra space to force the last element have some gap */}
+                <div></div>
             </div>
         </div>
         {
-            state !== STATE_ON_GOING.ONGOING && <Interuptions child={child} currentState={state} onClose={onExit} onResume={onResume} onCompleted={onCompleted} />
+            state !== STATE_ON_GOING.ONGOING && <Interuptions child={explainChild} currentState={state} onClose={onExit} onResume={onResume} onCompleted={onCompleted} />
         }
     </div>
 };
@@ -173,7 +175,7 @@ const Interuptions = ({ currentState, onResume, onClose, child }: { currentState
     </div>
 }
 
-const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }:
+const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explainItem }:
     { percentage: number, onClose: () => void, questions: typeof InterestBasedQuizTempData.questions, selected: number, onNext: () => void, explainItem?: number }) => {
 
     const showNav = explainItem === 1;
@@ -207,18 +209,18 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
             case 0:
                 ref = textRef;
                 width = 300;
-                if(isMobile){
+                if (isMobile) {
                     setImage(ToolTip0Mobile);
-                }else {
+                } else {
                     setImage(ToolTip0);
                 }
                 break;
             case 1:
                 width = 200;
-                if(isMobile){
-                    ref=progressRef;
+                if (isMobile) {
+                    ref = progressRef;
                     setImage(ToolTip1Mobile);
-                }else {
+                } else {
                     ref = rocketRef;
                     setImage(ToolTip1);
                 }
@@ -226,18 +228,18 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
             case 2:
                 ref = imageRef;
                 width = 200;
-                if(isMobile){
+                if (isMobile) {
                     setImage(ToolTip2Mobile);
-                }else {
+                } else {
                     setImage(ToolTip2);
                 }
                 break;
             case 3:
                 ref = explainRef;
                 width = 200;
-                if(isMobile){
+                if (isMobile) {
                     setImage(ToolTip3Mobile);
-                }else {
+                } else {
                     setImage(ToolTip3);
                 }
                 break;
@@ -248,10 +250,10 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
         setTop(refheight);
         if (isMobile) {
             setLeft(0)
-        }else{
+        } else {
             setLeft(refCenter);
         }
-    }, [explainItem,imageRef,explainRef, textRef, isMobile, renderAgain])
+    }, [explainItem, imageRef, explainRef, textRef, isMobile, renderAgain])
 
     const style: customProgressStyle = { '--completed': `${percentage}%`, visibility: showNav ? 'visible' : 'hidden' };
 
@@ -312,6 +314,8 @@ const Child = ({ percentage, onClose, questions, selected, onNext, explainItem }
                     <div className={Styles.icon} />
                 </div>
             </div>
+            {/* extra space to force the last element have some gap */}
+            <div></div>
         </div>
     </div>
 }
