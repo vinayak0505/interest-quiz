@@ -10,7 +10,7 @@ export const ToolTipForQuiz = ({ image, onNext, onClose, showFinishButton }: { i
             showFinishButton ?
                 <div className={Styles.button} onClick={onClose}>Let’s Begin</div>
                 : <div className={Styles.nav}>
-                    <div className={Styles.close} onClick={onClose} >Close</div>
+                    <div className={Styles.close} onClick={onClose} >Skip</div>
                     <div className={Styles.next} onClick={onNext} >Next</div>
                 </div>
         }
