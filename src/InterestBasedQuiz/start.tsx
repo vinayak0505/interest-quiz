@@ -7,6 +7,8 @@ import Lottie1 from './../assets/InterestBasedQuiz/lottie_1.json';
 import Lottie2 from './../assets/InterestBasedQuiz/lottie_2.json';
 import Lottie3 from './../assets/InterestBasedQuiz/lottie_3.json';
 import StartJourneyIcon from './../assets/InterestBasedQuiz/start_journey_icon.png'
+import PopupDropDown from "./popup_drop_down";
+import { PauseCardMobile, PauseCardWeb } from "./ongoing_cards";
 
 enum STATE_START {
     INIT = 'init',
@@ -24,6 +26,7 @@ interface customCSSProperties extends CSSProperties {
 
 const Start = ({ resume, onComplete, onClose }: { resume: boolean, onComplete: () => void, onClose: () => void }) => {
     const [state, setState] = useState<STATE_START>(STATE_START.HEY);
+    const [showClose, setShowClose] = useState(false);
 
     const onNext = () => {
         console.log("onNext", state, STATE_START.INIT);
@@ -31,7 +34,6 @@ const Start = ({ resume, onComplete, onClose }: { resume: boolean, onComplete: (
             setState(STATE_START.HEY);
         } else if (state === STATE_START.HEY) {
             setState(STATE_START.LOST);
-            // setState(STATE_START.FLOAT);
         } else if (state === STATE_START.FLOAT) {
             setState(STATE_START.LOST);
         } else if (state === STATE_START.LOST) {
@@ -124,8 +126,20 @@ const Start = ({ resume, onComplete, onClose }: { resume: boolean, onComplete: (
                 {!isMobile && <div className={Styles.item} />}
             </div>
             {(state !== STATE_START.START && state !== STATE_START.RESUME) ?
-                <div className={Styles.skip} onClick={onSkip}>Skip</div>
-                : <div className={Styles.close} onClick={onClose} ></div>
+                <div className={Styles.skip} key={"skip"} onClick={onSkip}>Skip</div>
+                : <div className={Styles.close} key={"close"} onClick={() => setShowClose(true)} ></div>
+            }
+            {
+                showClose && <div className={Styles.interuptions}>
+                    <PopupDropDown
+                        webChildren={
+                            <PauseCardWeb onClose={onClose} onResume={() => setShowClose(false)} />
+                        }
+                        mobileChildren={
+                            <PauseCardMobile onClose={onClose} onResume={() => setShowClose(false)} />
+                        }
+                    />
+                </div>
             }
         </div>
     );

@@ -110,9 +110,7 @@ const Header = ({ completed, onExplain }: { completed: number, onExplain: () => 
     return (
         <div className={Styles.header}>
             <div className={Styles.completed}>
-                {/* <div className={Styles.box}> */}
                 {completed}% completed
-                {/* </div> */}
             </div>
             <div className={Styles.explain} onClick={onExplain}>
             </div>
@@ -255,7 +253,7 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
         }
         setTop(reftop);
         if (isMobile) {
-            setLeft(0)
+                setLeft(0)
         } else {
             setLeft(refCenter);
         }
@@ -263,12 +261,12 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
 
     const style: customProgressStyle = { '--completed': `${percentage}%`, visibility: showNav ? 'visible' : 'hidden' };
 
-    return <div className={Styles.background} style={{backgroundImage: 'none'}} >
+    return <div className={Styles.background} style={{ backgroundImage: 'none' }} >
         <div
             className={Styles.tooltip}
             style={{
                 top: top + 'px',
-                width: isMobile ? ('max-content') : (explainItem === 0 ? '600px' : '400px'),
+                width: isMobile ? ('fit-content') : (explainItem === 0 ? '600px' : '400px'),
                 left: left + 'px',
             }}>
 
