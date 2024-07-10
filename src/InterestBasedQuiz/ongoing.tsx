@@ -15,6 +15,13 @@ import ToolTip2 from './../assets/InterestBasedQuiz/tooltip_2.png';
 import ToolTip2Mobile from './../assets/InterestBasedQuiz/tooltip_2_mobile.png';
 import ToolTip3 from './../assets/InterestBasedQuiz/tooltip_3.png';
 import ToolTip3Mobile from './../assets/InterestBasedQuiz/tooltip_3_mobile.png';
+import ExplainIcon from './../assets/InterestBasedQuiz/explain.png';
+import ProgressLeftIcon from './../assets/InterestBasedQuiz/progress_left_icon.png';
+import ProgressRightIcon from './../assets/InterestBasedQuiz/progress_right_icon.png';
+import ProgressIcon from './../assets/InterestBasedQuiz/progress_icon.png';
+import LeftArrow from './../assets/InterestBasedQuiz/left_arrow.png';
+import RightArrow from './../assets/InterestBasedQuiz/right_arrow.png';
+
 
 enum STATE_ON_GOING {
     EXPLAIN,
@@ -88,10 +95,10 @@ const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () 
                 </div>
                 <div className={Styles.change_mobile}>
                     <div className={Styles.pre} onClick={onPrev} >
-                        <div className={Styles.icon} />
+                        <img className={Styles.icon} src={LeftArrow} alt="previous" />
                     </div>
                     <div className={Styles.next} onClick={onNext} >
-                        <div className={Styles.icon} />
+                        <img className={Styles.icon} src={RightArrow} alt="Next" />
                     </div>
                 </div>
                 {/* extra space to force the last element have some gap */}
@@ -112,8 +119,8 @@ const Header = ({ completed, onExplain }: { completed: number, onExplain: () => 
             <div className={Styles.completed}>
                 {completed}% completed
             </div>
-            <div className={Styles.explain} onClick={onExplain}>
-            </div>
+            <img className={Styles.explain} onClick={onExplain} src={ExplainIcon} alt="explain">
+            </img>
         </div >
     )
 }
@@ -122,7 +129,7 @@ const ProgressBar = ({ percentage }: { percentage: number }) => {
     const style: customProgressStyle = { '--completed': `${percentage}%` };
 
     return <div className={Styles.progress_container}>
-        <div className={Styles.left_icon} />
+        <img className={Styles.left_icon} src={ProgressLeftIcon} alt="progress left icon" />
         <div className={Styles.progress} style={style}>
 
             <div className={Styles.line_container}>
@@ -133,10 +140,10 @@ const ProgressBar = ({ percentage }: { percentage: number }) => {
             <div className={Styles.progress_bar_border}>
                 <div className={Styles.progress_bar} />
             </div>
-            <div className={Styles.progress_icon}></div>
+            <img className={Styles.progress_icon} src={ProgressIcon} alt="progress icon"></img>
 
         </div>
-        <div className={Styles.right_icon} />
+        <img className={Styles.right_icon} src={ProgressRightIcon} alt="progress right icon" />
     </div>
 }
 
@@ -146,10 +153,10 @@ const Navigation = ({ onNext, onPrev, onClose }: { onNext: () => void, onPrev: (
         </div>
         <div className={Styles.change}>
             <div className={Styles.pre} onClick={onPrev} >
-                <div className={Styles.icon} />
+                <img className={Styles.icon} src={LeftArrow} alt="previous" />
             </div>
             <div className={Styles.next} onClick={onNext} >
-                <div className={Styles.icon} />
+                <img className={Styles.icon} src={RightArrow} alt="Next" />
             </div>
         </div>
     </div>
@@ -184,10 +191,10 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
     const [left, setLeft] = useState(0);
     const [image, setImage] = useState(ToolTip0);
     const textRef = useRef<HTMLDivElement>(null);
-    const rocketRef = useRef<HTMLDivElement>(null);
+    const rocketRef = useRef<HTMLImageElement>(null);
     const progressRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
-    const explainRef = useRef<HTMLDivElement>(null);
+    const explainRef = useRef<HTMLImageElement>(null);
 
     const [isMobile, setIsMobile] = useState<boolean>(false);
     const [height, setHeight] = useState(window.innerHeight);
@@ -253,7 +260,7 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
         }
         setTop(reftop);
         if (isMobile) {
-                setLeft(0)
+            setLeft(0)
         } else {
             setLeft(refCenter);
         }
@@ -276,11 +283,11 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
             <div className={Styles.completed} style={{ visibility: 'hidden' }}>
                 {percentage}% completed
             </div>
-            <div className={Styles.explain} ref={explainRef} style={{ visibility: showExplain ? 'visible' : 'hidden' }}>
-            </div>
+            <img className={Styles.explain} src={ExplainIcon} alt="explain" ref={explainRef} style={{ visibility: showExplain ? 'visible' : 'hidden' }}>
+            </img>
         </div >
         <div className={Styles.progress_container} >
-            <div className={Styles.left_icon} style={{ visibility: 'hidden' }} />
+            <img className={Styles.left_icon} src={ProgressLeftIcon} alt="progress left icon" style={{ visibility: 'hidden' }} />
             <div className={Styles.progress} ref={progressRef} style={style}>
 
                 <div className={Styles.line_container} >
@@ -291,10 +298,10 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
                 <div className={Styles.progress_bar_border} style={{ visibility: showNav ? 'visible' : 'hidden' }}>
                     <div className={Styles.progress_bar} />
                 </div>
-                <div className={Styles.progress_icon} ref={rocketRef} ></div>
+                <img className={Styles.progress_icon} src={ProgressIcon} alt="progress icon" ref={rocketRef} ></img>
 
             </div>
-            <div className={Styles.right_icon} style={{ visibility: 'hidden' }} />
+            <img className={Styles.right_icon} src={ProgressRightIcon} alt="progress right icon" style={{ visibility: 'hidden' }} />
         </div>
         <div className={Styles.translucent_card + " " + Styles.invisible_translucent_card} style={{ background: 'transparent' }}>
             <img className={Styles.image} onLoad={() => { setRenderAgain(!renderAgain) }} ref={imageRef} src={img} alt={questions[selected].questions} style={{ visibility: showImage ? 'visible' : 'hidden' }} />
@@ -312,10 +319,10 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
             </div>
             <div className={Styles.change_mobile} style={{ visibility: 'hidden' }} >
                 <div className={Styles.pre}  >
-                    <div className={Styles.icon} />
+                    <img className={Styles.icon} src={LeftArrow} alt="previous" />
                 </div>
                 <div className={Styles.next} >
-                    <div className={Styles.icon} />
+                    <img className={Styles.icon} src={RightArrow} alt="Next"  />
                 </div>
             </div>
             {/* extra space to force the last element have some gap */}

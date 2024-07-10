@@ -98,7 +98,6 @@
         padding: 14px;
         transition: border 0.5s;
         background-color: transparent;
-        content: url('./../assets/InterestBasedQuiz/explain.png');
 
         &:hover {
             border: 1px solid #00ACFF;
@@ -145,12 +144,10 @@
     .left_icon {
         height: 80px;
         margin-right: 10px;
-        content: url('./../assets/InterestBasedQuiz/progress_left_icon.png');
     }
 
     .right_icon {
         height: 32px;
-        content: url('./../assets/InterestBasedQuiz/progress_right_icon.png');
     }
 
     .progress {
@@ -190,7 +187,6 @@
             position: absolute;
             height: var(--width);
             width: var(--width);
-            content: url('./../assets/InterestBasedQuiz/progress_icon.png');
         }
 
         .line_container {
@@ -260,7 +256,6 @@
                 transition: margin var(--navigation-time);
                 width: 100%;
                 height: 100%;
-                content: url('./../assets/InterestBasedQuiz/left_arrow.png');
             }
 
             &:hover {
@@ -293,7 +288,6 @@
                 transition: margin var(--navigation-time);
                 width: 100%;
                 height: 100%;
-                content: url('./../assets/InterestBasedQuiz/right_arrow.png');
             }
 
             &:hover {
@@ -401,7 +395,6 @@
                     box-sizing: border-box;
                     width: 100%;
                     height: 100%;
-                    content: url('./../assets/InterestBasedQuiz/left_arrow.png');
                 }
             }
 
@@ -419,7 +412,6 @@
                     box-sizing: border-box;
                     width: 100%;
                     height: 100%;
-                    content: url('./../assets/InterestBasedQuiz/right_arrow.png');
                 }
             }
         }
