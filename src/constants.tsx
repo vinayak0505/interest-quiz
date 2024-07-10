@@ -1,10 +1,11 @@
 
-import image from './assets/InterestBasedQuiz/career_image.png';
+const image = 'https://app-two-point-o.s3.ap-south-1.amazonaws.com/InterestBasedQuiz/career_image.png';
 
 export const InterestBasedQuizTempData = {
     state: null,
     questions: [
         {
+            image: "https://app-two-point-o.s3.ap-south-1.amazonaws.com/InterestBasedQuiz/quiz1.png",
             questions: "Olly's friend is having trouble with his math problem. What should he do about it?",
             id: 1,
             options: [
@@ -19,6 +20,7 @@ export const InterestBasedQuizTempData = {
             ]
         },
         {
+            image: "https://app-two-point-o.s3.ap-south-1.amazonaws.com/InterestBasedQuiz/quiz1.png",
             questions: "What is your hobby?",
             id: 2,
             options: [
@@ -33,6 +35,7 @@ export const InterestBasedQuizTempData = {
             ]
         },
         {
+            image: "https://app-two-point-o.s3.ap-south-1.amazonaws.com/InterestBasedQuiz/quiz1.png",
             questions: "What is your favourite color?",
             id: 3,
             options: [
@@ -47,6 +50,7 @@ export const InterestBasedQuizTempData = {
             ]
         },
         {
+            image: "https://app-two-point-o.s3.ap-south-1.amazonaws.com/InterestBasedQuiz/quiz1.png",
             questions: "What is your favourite movie?",
             id: 4,
             options: [
@@ -61,6 +65,7 @@ export const InterestBasedQuizTempData = {
             ]
         },
         {
+            image: "https://app-two-point-o.s3.ap-south-1.amazonaws.com/InterestBasedQuiz/quiz1.png",
             questions: "What is your favourite book?",
             id: 5,
             options: [

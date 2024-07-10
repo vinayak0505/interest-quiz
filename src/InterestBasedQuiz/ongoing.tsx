@@ -2,19 +2,18 @@ import { InterestBasedQuizTempData } from "../constants";
 import Styles from "./ongoing.module.scss";
 
 import { CSSProperties, useEffect, useRef, useState } from "react";
-import img from "../assets/InterestBasedQuiz/quiz1.png";
 import InterestQuizButton from "./interest_quiz_button";
 import PopupDropDown from "./popup_drop_down";
 import { PauseCardMobile, PauseCardWeb } from "./ongoing_cards";
 import { ToolTipForQuiz } from "./custom_tooltip";
-import ToolTip0 from './../assets/InterestBasedQuiz/tooltip_0.png';
-import ToolTip0Mobile from './../assets/InterestBasedQuiz/tooltip_0_mobile.png';
-import ToolTip1 from './../assets/InterestBasedQuiz/tooltip_1.png';
-import ToolTip1Mobile from './../assets/InterestBasedQuiz/tooltip_1_mobile.png';
-import ToolTip2 from './../assets/InterestBasedQuiz/tooltip_2.png';
-import ToolTip2Mobile from './../assets/InterestBasedQuiz/tooltip_2_mobile.png';
-import ToolTip3 from './../assets/InterestBasedQuiz/tooltip_3.png';
-import ToolTip3Mobile from './../assets/InterestBasedQuiz/tooltip_3_mobile.png';
+const ToolTip0 = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/tooltip_0.png';
+const ToolTip0Mobile = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/tooltip_0_mobile.png';
+const ToolTip1 = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/tooltip_1.png';
+const ToolTip1Mobile = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/tooltip_1_mobile.png';
+const ToolTip2 = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/tooltip_2.png';
+const ToolTip2Mobile = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/tooltip_2_mobile.png';
+const ToolTip3 = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/tooltip_3.png';
+const ToolTip3Mobile = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/tooltip_3_mobile.png';
 
 enum STATE_ON_GOING {
     EXPLAIN,
@@ -63,6 +62,9 @@ const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () 
         }
     }
 
+    console.log(questions);
+
+
     const explainChild =
         <ExplainChild {...{ percentage, onClose: () => setState(STATE_ON_GOING.ONGOING), questions, selected, onNext: () => setExplainItem(explainItem + 1), explainItem }} />
     return <div className={Styles.container}>
@@ -71,7 +73,7 @@ const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () 
             <Header completed={percentage} onExplain={onExplain} />
             <ProgressBar percentage={percentage} />
             <div className={Styles.translucent_card}>
-                <img className={Styles.image} src={img} key={selected + "image"} alt={questions[selected].questions} />
+                <img className={Styles.image} src={questions[selected].image} key={selected + "image"} alt={questions[selected].questions} />
                 <div className={Styles.question} key={selected + "question"}>
                     {questions[selected].questions}
                 </div>
@@ -175,7 +177,7 @@ const Interuptions = ({ currentState, onResume, onClose, child }: { currentState
 
 const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explainItem }:
     { percentage: number, onClose: () => void, questions: typeof InterestBasedQuizTempData.questions, selected: number, onNext: () => void, explainItem?: number }) => {
-
+    
     const showNav = explainItem === 1;
     const showText = explainItem === 0;
     const showImage = explainItem === 0 || explainItem === 2;
@@ -253,7 +255,7 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
         }
         setTop(reftop);
         if (isMobile) {
-                setLeft(0)
+            setLeft(0)
         } else {
             setLeft(refCenter);
         }
@@ -297,7 +299,7 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
             <div className={Styles.right_icon} style={{ visibility: 'hidden' }} />
         </div>
         <div className={Styles.translucent_card + " " + Styles.invisible_translucent_card} style={{ background: 'transparent' }}>
-            <img className={Styles.image} onLoad={() => { setRenderAgain(!renderAgain) }} ref={imageRef} src={img} alt={questions[selected].questions} style={{ visibility: showImage ? 'visible' : 'hidden' }} />
+            <img className={Styles.image} onLoad={() => { setRenderAgain(!renderAgain) }} ref={imageRef} src={questions[selected].image} alt={questions[selected].questions} style={{ visibility: showImage ? 'visible' : 'hidden' }} />
             <div className={Styles.question} ref={textRef} style={{ visibility: showText ? 'visible' : 'hidden' }}>
                 {questions[selected].questions}
             </div>

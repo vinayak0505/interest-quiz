@@ -1,7 +1,7 @@
 import { InterestQuizButtonSecondary, InterestQuizButtonToolTip, InterestQuizUnlockButton } from "./interest_quiz_button";
 import Styles from "./ongoing_cards.module.scss";
-import pauseImage from "./../assets/InterestBasedQuiz/pause_image.png"
-import unlockImage from "./../assets/InterestBasedQuiz/unlock_image.png"
+const pauseImage = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/pause_image.png';
+const unlockImage = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/unlock_image.png';
 
 export const PauseCardWeb = ({ onResume, onClose }: { onResume: () => void, onClose: () => void }) => {
     return <div className={Styles.outer_card}>

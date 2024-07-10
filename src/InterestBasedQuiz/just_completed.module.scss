@@ -1,3 +1,4 @@
+@use '../file' as var;
 .container {
     width: 100vw;
     height: 100dvh;
@@ -12,7 +13,7 @@
         position: absolute;
         background-position: center;
         background-size: cover;
-        background-image: url('./../assets/InterestBasedQuiz/background_original.png');
+        background-image: url(var.$aws-base-url + '/InterestBasedQuiz/background_original.png');
     }
 
     .front {
@@ -41,7 +42,7 @@
             position: relative;
             width: 50vw;
             height: auto;
-            content: url('./../assets/InterestBasedQuiz/planet_faded.png');
+            content: url(var.$aws-base-url + '/InterestBasedQuiz/planet_faded.png');
         }
 
         .rocket {
@@ -92,7 +93,7 @@
         position: absolute;
         background-position: center;
         background-size: cover;
-        background-image: url('./../assets/InterestBasedQuiz/background_original.png');
+        background-image: url(var.$aws-base-url + '/InterestBasedQuiz/background_original.png');
     }
 
     .front {
@@ -131,7 +132,7 @@
         .planet {
             height: 60vh;
             width: auto;
-            content: url('./../assets/InterestBasedQuiz/planet_original.png');
+            content: url(var.$aws-base-url + '/InterestBasedQuiz/planet_original.png');
         }
     }
 }

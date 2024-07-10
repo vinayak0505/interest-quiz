@@ -2,13 +2,13 @@ import { CSSProperties, useEffect, useState } from "react";
 import Styles from "./start.module.scss";
 import InterestQuizButton from "./interest_quiz_button";
 import Lottie from 'react-lottie';
-import LottieInit from './../assets/InterestBasedQuiz/lottie_init.json';
-import Lottie1 from './../assets/InterestBasedQuiz/lottie_1.json';
-import Lottie2 from './../assets/InterestBasedQuiz/lottie_2.json';
-import Lottie3 from './../assets/InterestBasedQuiz/lottie_3.json';
-import StartJourneyIcon from './../assets/InterestBasedQuiz/start_journey_icon.png'
 import PopupDropDown from "./popup_drop_down";
 import { PauseCardMobile, PauseCardWeb } from "./ongoing_cards";
+const LottieInit = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/lottie_init.json';
+const Lottie1 = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/lottie_1.json';
+const Lottie2 = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/lottie_2.json';
+const Lottie3 = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/lottie_3.json';
+const StartJourneyIcon = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/start_journey_icon.png'
 
 enum STATE_START {
     INIT = 'init',

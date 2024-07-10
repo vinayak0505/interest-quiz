@@ -5,7 +5,7 @@ import Start from "./InterestBasedQuiz/start";
 import React, { useEffect, useState } from "react";
 import { InterestBasedQuizTempData } from "./constants";
 
-import "./App.css";
+import "./App.scss";
 
 enum STATE {
     START,

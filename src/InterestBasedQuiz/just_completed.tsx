@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Styles from "./just_completed.module.scss";
 import PopupDropDown from "./popup_drop_down";
-import { CopletedCardMobile, CopletedCardWeb, PauseCardWeb } from "./ongoing_cards";
-import rocket_mobile from '../assets/InterestBasedQuiz/rocket_mobile.png';
-import rocket from './../assets/InterestBasedQuiz/rocket.png';
+import { CopletedCardMobile, CopletedCardWeb } from "./ongoing_cards";
+const rocket_mobile = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/rocket_mobile.png';
+const rocket = process.env.REACT_APP_AWS_BASE_URL + '/InterestBasedQuiz/rocket.png';
 
 enum JustCompletedState {
     ANIMATE = 'animate',
@@ -15,7 +15,7 @@ const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
 
     useEffect(() => {
         if (state !== JustCompletedState.UNLOCK) return;
-        
+
         const timer = setTimeout(() => {
             setState(JustCompletedState.DONE);
         }, 2000)
@@ -24,13 +24,13 @@ const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
     }, [state]);
 
     const onAnimationEnd = () => {
-        if(state !== JustCompletedState.ANIMATE) return;
+        if (state !== JustCompletedState.ANIMATE) return;
         setState(JustCompletedState.UNLOCK);
     }
 
     const [animate, setAnimate] = useState(false);
-    const onLoad = () =>{
-        
+    const onLoad = () => {
+
         setAnimate(true);
     }
 
@@ -64,7 +64,7 @@ const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
                 {
                     state === JustCompletedState.DONE &&
                     <div className={Styles.interuptions}>
-                        <PopupDropDown 
+                        <PopupDropDown
                             webChildren={<CopletedCardWeb onCompleted={onUnlock} />}
                             mobileChildren={<CopletedCardMobile onCompleted={onUnlock} />}
                         />

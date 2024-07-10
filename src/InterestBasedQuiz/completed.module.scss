@@ -1,9 +1,10 @@
+@use '../file' as var;
 .container {
     width: 100vw;
     height: 100dvh;
     background-position: center;
     background-size: cover;
-    background-image: url('./../assets/InterestBasedQuiz/completed_background.png');
+    background-image: url(var.$aws-base-url + '/InterestBasedQuiz/completed_background.png');
     position: relative;
 }
 
@@ -33,7 +34,7 @@
     padding: 0px 12px;
 
     .item {
-        content: url('./../assets/InterestBasedQuiz/SimeEllipse.png');
+        content: url(var.$aws-base-url + '/InterestBasedQuiz/SimeEllipse.png');
     }
 }
 
@@ -77,13 +78,13 @@
         .before {
             width: 48px;
             height: 36px;
-            content: url('./../assets/InterestBasedQuiz/two_stars.png');
+            content: url(var.$aws-base-url + '/InterestBasedQuiz/two_stars.png');
         }
 
         .after {
             width: 48px;
             height: 36px;
-            content: url('./../assets/InterestBasedQuiz/two_stars.png');
+            content: url(var.$aws-base-url + '/InterestBasedQuiz/two_stars.png');
             transform: scaleX(-1);
         }
     }
@@ -105,7 +106,7 @@
             display: inline-block;
             width: 30px;
             height: 30px;
-            background-image: url('./../assets/InterestBasedQuiz/touch.png');
+            background-image: url(var.$aws-base-url + '/InterestBasedQuiz/touch.png');
         }
     }
 
@@ -151,13 +152,13 @@
             .before {
                 width: 30px;
                 height: 24px;
-                content: url('./../assets/InterestBasedQuiz/two_stars_mobile.png');
+                content: url(var.$aws-base-url + '/InterestBasedQuiz/two_stars_mobile.png');
             }
 
             .after {
                 width: 30px;
                 height: 24px;
-                content: url('./../assets/InterestBasedQuiz/two_stars_mobile.png');
+                content: url(var.$aws-base-url + '/InterestBasedQuiz/two_stars_mobile.png');
             }
         }
 
