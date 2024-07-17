@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Styles from "./just_completed.module.scss";
 import PopupDropDown from "./popup_drop_down";
-import { CopletedCardMobile, CopletedCardWeb, PauseCardWeb } from "./ongoing_cards";
+import { CopletedCardMobile, CopletedCardWeb } from "./ongoing_cards";
 import rocket_mobile from '../assets/InterestBasedQuiz/rocket_mobile.png';
 import rocket from './../assets/InterestBasedQuiz/rocket.png';
 
@@ -34,7 +34,7 @@ const JustCompleted = ({ onUnlock }: { onUnlock: () => void }) => {
         setAnimate(true);
     }
 
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.matchMedia("(max-width: 700px)").matches);
     useEffect(() => {
         function updateSize() {
             setIsMobile(window.matchMedia("(max-width: 700px)").matches);

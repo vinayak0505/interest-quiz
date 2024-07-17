@@ -109,7 +109,7 @@ const Header = ({ completed, onExplain }: { completed: number, onExplain: () => 
 
     return (
         <div className={Styles.header}>
-            <div className={Styles.completed}>
+            <div className={Styles.completed}}>
                 {completed}% completed
             </div>
             <div className={Styles.explain} onClick={onExplain}>
@@ -247,13 +247,13 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
         if (ref?.current == null) return;
         let reftop = ref.current.getBoundingClientRect().height + ref.current.getBoundingClientRect().y + 20;
         const refCenter = ref.current.getBoundingClientRect().x + ref.current.getBoundingClientRect().width / 2 - width
-        const maxTop = window.innerHeight - 200;
+        const maxTop = window.innerHeight - 170;
         if (reftop > maxTop) {
             reftop = maxTop;
         }
         setTop(reftop);
         if (isMobile) {
-                setLeft(0)
+            setLeft(0)
         } else {
             setLeft(refCenter);
         }

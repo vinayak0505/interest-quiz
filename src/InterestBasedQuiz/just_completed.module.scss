@@ -126,6 +126,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             -webkit-text-stroke: 0.5px white;
+            text-align: center;
         }
 
         .planet {
@@ -207,7 +208,6 @@
                 font-weight: 400;
                 line-height: 53.12px;
                 letter-spacing: 0.04em;
-                text-align: center;
                 stroke: 0.5px solid #ffffff70;
                 text-shadow: #ffffff75 0.4px 1px 2px;
             }
