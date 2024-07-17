@@ -109,7 +109,7 @@ const Header = ({ completed, onExplain }: { completed: number, onExplain: () => 
 
     return (
         <div className={Styles.header}>
-            <div className={Styles.completed}}>
+            <div className={Styles.completed}>
                 {completed}% completed
             </div>
             <div className={Styles.explain} onClick={onExplain}>
