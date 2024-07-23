@@ -119,6 +119,7 @@
         font-size: 14px;
         font-weight: 400;
         color: white;
+        transition: color 1s;
 
         // .box {
         //     border-radius: calc(var(--height) / 2);
@@ -241,71 +242,86 @@
         justify-content: space-between;
         --navigation-time: 0.2s;
 
-        .pre {
+        .pre_box{
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
             cursor: pointer;
-            box-sizing: border-box;
-            width: 90px;
-            height: 90px;
-            border: 1px solid #FFFFFF80;
-            background: #001C3C;
-            border-radius: 50%;
-            position: relative;
-            transition: padding var(--navigation-time), translate var(--navigation-time), margin-left var(--navigation-time);
-            padding: 16px 0px 16px 30px;
-            translate: -45px;
 
-            .icon {
+            .pre {
                 box-sizing: border-box;
-                margin-left: 24px;
-                transition: margin var(--navigation-time);
-                width: 100%;
-                height: 100%;
-                content: url('./../assets/InterestBasedQuiz/left_arrow.png');
+                width: 90px;
+                height: 90px;
+                border: 1px solid #FFFFFF80;
+                background: #001C3C;
+                border-radius: 50%;
+                position: relative;
+                transition: padding var(--navigation-time), translate var(--navigation-time), margin-left var(--navigation-time);
+                padding: 16px 0px 16px 30px;
+                translate: -45px;
+    
+                .icon {
+                    box-sizing: border-box;
+                    margin-left: 24px;
+                    transition: margin var(--navigation-time);
+                    width: 100%;
+                    height: 100%;
+                    content: url('./../assets/InterestBasedQuiz/left_arrow.png');
+                }
             }
 
             &:hover {
-                translate: 0px;
-                padding: 24px;
-                margin-left: 20px;
-
+                .pre {
+                    translate: 0px;
+                    padding: 24px;
+                    margin-left: 20px;
+    
+                    .icon {
+                        margin-left: 0px;
+                    }
+                }
+            }
+        }
+       
+        .next_box{
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+            cursor: pointer;
+            .next {
+                box-sizing: border-box;
+                width: 90px;
+                height: 90px;
+                border: 1px solid #FFFFFF80;
+                background: #001C3C;
+                border-radius: 50%;
+                position: relative;
+                transition: padding var(--navigation-time), translate var(--navigation-time), margin-right var(--navigation-time);
+                padding: 16px 30px 16px 0px;
+                translate: 45px;
+    
                 .icon {
-                    margin-left: 0px;
+                    box-sizing: border-box;
+                    margin-left: -24px;
+                    transition: margin var(--navigation-time);
+                    width: 100%;
+                    height: 100%;
+                    content: url('./../assets/InterestBasedQuiz/right_arrow.png');
+                }
+            }
+
+            &:hover{
+                .next {
+                    translate: 0px;
+                    padding: 24px;
+                    margin-right: 20px;
+    
+                    .icon {
+                        margin-left: 0px;
+                    }
                 }
             }
         }
 
-        .next {
-            cursor: pointer;
-            box-sizing: border-box;
-            width: 90px;
-            height: 90px;
-            border: 1px solid #FFFFFF80;
-            background: #001C3C;
-            border-radius: 50%;
-            position: relative;
-            transition: padding var(--navigation-time), translate var(--navigation-time), margin-right var(--navigation-time);
-            padding: 16px 30px 16px 0px;
-            translate: 45px;
-
-            .icon {
-                box-sizing: border-box;
-                margin-left: -24px;
-                transition: margin var(--navigation-time);
-                width: 100%;
-                height: 100%;
-                content: url('./../assets/InterestBasedQuiz/right_arrow.png');
-            }
-
-            &:hover {
-                translate: 0px;
-                padding: 24px;
-                margin-right: 20px;
-
-                .icon {
-                    margin-left: 0px;
-                }
-            }
-        }
+        
     }
 }
 
@@ -321,6 +337,27 @@
     z-index: 5;
     position: absolute;
     transition: top 0.5s, left 0.5s;
+}
+
+.completed_tooltip{
+    z-index: 2;
+    position: absolute;
+    animation: completed_tooltip_animation 4s forwards;
+}
+
+@keyframes completed_tooltip_animation {
+    0% {
+        opacity: 0;
+    }
+    25%{
+        opacity: 1;
+    }
+    75%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 
@@ -386,7 +423,7 @@
             width: 100%;
             justify-content: space-between;
             --size: 59px;
-
+            
             .pre {
                 cursor: pointer;
                 box-sizing: border-box;

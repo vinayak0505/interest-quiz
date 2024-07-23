@@ -121,7 +121,11 @@
     letter-spacing: 0.025em;
     text-align: center;
     color: white;
+    max-width: 955px;
     animation: finaltext 1s;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(170deg, #FFFFFF 21.5%, #FFC328 100%);
+    background-clip: text;
 }
 
 .finaltextgradient {
@@ -230,19 +234,19 @@
         line-height: 29.76px;
     }
 
-    .finaltextgradient2 {
-        -webkit-text-fill-color: transparent;
-        background: linear-gradient(to right, #FFFFFF 50%, #FFC328 100%);
-        background-clip: text;
+    // .finaltextgradient2 {
+    //     -webkit-text-fill-color: transparent;
+    //     background: linear-gradient(to right, #FFFFFF 50%, #FFC328 100%);
+    //     background-clip: text;
 
-    }
+    // }
 
-    .finaltextgradient3 {
-        -webkit-text-fill-color: transparent;
-        background: linear-gradient(to right, #FFFFFF 10%, #FFC328 100%);
-        background-clip: text;
+    // .finaltextgradient3 {
+    //     -webkit-text-fill-color: transparent;
+    //     background: linear-gradient(to right, #FFFFFF 10%, #FFC328 100%);
+    //     background-clip: text;
 
-    }
+    // }
 
     .button{
         width: 100% !important;

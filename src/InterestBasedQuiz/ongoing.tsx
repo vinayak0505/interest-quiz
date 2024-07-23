@@ -1,12 +1,12 @@
 import { InterestBasedQuizTempData } from "../constants";
 import Styles from "./ongoing.module.scss";
 
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import img from "../assets/InterestBasedQuiz/quiz1.png";
 import InterestQuizButton from "./interest_quiz_button";
 import PopupDropDown from "./popup_drop_down";
 import { PauseCardMobile, PauseCardWeb } from "./ongoing_cards";
-import { ToolTipForQuiz } from "./custom_tooltip";
+import CustomToopTip, { ToolTipForQuiz } from "./custom_tooltip";
 import ToolTip0 from './../assets/InterestBasedQuiz/tooltip_0.png';
 import ToolTip0Mobile from './../assets/InterestBasedQuiz/tooltip_0_mobile.png';
 import ToolTip1 from './../assets/InterestBasedQuiz/tooltip_1.png';
@@ -15,6 +15,8 @@ import ToolTip2 from './../assets/InterestBasedQuiz/tooltip_2.png';
 import ToolTip2Mobile from './../assets/InterestBasedQuiz/tooltip_2_mobile.png';
 import ToolTip3 from './../assets/InterestBasedQuiz/tooltip_3.png';
 import ToolTip3Mobile from './../assets/InterestBasedQuiz/tooltip_3_mobile.png';
+import ToolTip50Completed from './../assets/InterestBasedQuiz/tooltip_50_completed.png';
+import ToolTip50CompletedMobile from './../assets/InterestBasedQuiz/tooltip_50_completed_mobile.png';
 
 enum STATE_ON_GOING {
     EXPLAIN,
@@ -87,11 +89,15 @@ const OnGoing = ({ onCompleted, onExit }: { onCompleted: () => void, onExit: () 
                     }
                 </div>
                 <div className={Styles.change_mobile}>
-                    <div className={Styles.pre} onClick={onPrev} >
-                        <div className={Styles.icon} />
+                    <div className={Styles.pre_box}>
+                        <div className={Styles.pre} onClick={onPrev} >
+                            <div className={Styles.icon} />
+                        </div>
                     </div>
-                    <div className={Styles.next} onClick={onNext} >
-                        <div className={Styles.icon} />
+                    <div className={Styles.next_box}>
+                        <div className={Styles.next} onClick={onNext} >
+                            <div className={Styles.icon} />
+                        </div>
                     </div>
                 </div>
                 {/* extra space to force the last element have some gap */}
@@ -109,7 +115,7 @@ const Header = ({ completed, onExplain }: { completed: number, onExplain: () => 
 
     return (
         <div className={Styles.header}>
-            <div className={Styles.completed}>
+            <div className={Styles.completed} style={{ color: completed === 50 ? '#13C2C2' : '' }}>
                 {completed}% completed
             </div>
             <div className={Styles.explain} onClick={onExplain}>
@@ -120,9 +126,37 @@ const Header = ({ completed, onExplain }: { completed: number, onExplain: () => 
 
 const ProgressBar = ({ percentage }: { percentage: number }) => {
     const style: customProgressStyle = { '--completed': `${percentage}%` };
+    const show50Card = useMemo(() => percentage >= 50, [percentage]);
+    const [top, setTop] = useState(0);
+    const [left, setLeft] = useState(0);
+    const leftIconRef = useRef<HTMLDivElement>(null);
+    const isMobile = false;
+
+    useEffect(() => {
+        var width = 200;
+        if (leftIconRef?.current == null) return;
+        const reftop = leftIconRef.current.getBoundingClientRect().height + leftIconRef.current.getBoundingClientRect().y;
+        const refCenter = leftIconRef.current.getBoundingClientRect().x + 10 + (leftIconRef.current.getBoundingClientRect().width / 2) - width;
+        setTop(reftop);
+        if (isMobile) {
+            setLeft(0)
+        } else {
+            setLeft(refCenter);
+        }
+    }, [leftIconRef, isMobile])
 
     return <div className={Styles.progress_container}>
-        <div className={Styles.left_icon} />
+        {show50Card && <div
+            className={Styles.completed_tooltip}
+            style={{
+                top: top + 'px',
+                width: isMobile ? 'fit-content' : '400px',
+                left: isMobile ? '5px' : left + 'px',
+            }}>
+            <CustomToopTip image={isMobile ? ToolTip50CompletedMobile : ToolTip50Completed} />
+        </div>
+        }
+        <div className={Styles.left_icon} ref={leftIconRef} />
         <div className={Styles.progress} style={style}>
 
             <div className={Styles.line_container}>
@@ -137,7 +171,7 @@ const ProgressBar = ({ percentage }: { percentage: number }) => {
 
         </div>
         <div className={Styles.right_icon} />
-    </div>
+    </div >
 }
 
 const Navigation = ({ onNext, onPrev, onClose }: { onNext: () => void, onPrev: () => void, onClose: () => void }) => {
@@ -145,11 +179,15 @@ const Navigation = ({ onNext, onPrev, onClose }: { onNext: () => void, onPrev: (
         <div className={Styles.close} onClick={onClose} >
         </div>
         <div className={Styles.change}>
-            <div className={Styles.pre} onClick={onPrev} >
-                <div className={Styles.icon} />
+            <div className={Styles.pre_box} onClick={onPrev}>
+                <div className={Styles.pre}>
+                    <div className={Styles.icon} />
+                </div>
             </div>
-            <div className={Styles.next} onClick={onNext} >
-                <div className={Styles.icon} />
+            <div className={Styles.next_box} onClick={onNext} >
+                <div className={Styles.next}>
+                    <div className={Styles.icon} />
+                </div>
             </div>
         </div>
     </div>
@@ -311,11 +349,15 @@ const ExplainChild = ({ percentage, onClose, questions, selected, onNext, explai
                 }
             </div>
             <div className={Styles.change_mobile} style={{ visibility: 'hidden' }} >
-                <div className={Styles.pre}  >
-                    <div className={Styles.icon} />
+                <div className={Styles.pre_box}>
+                    <div className={Styles.pre}>
+                        <div className={Styles.icon} />
+                    </div>
                 </div>
-                <div className={Styles.next} >
-                    <div className={Styles.icon} />
+                <div className={Styles.next_box}>
+                    <div className={Styles.next} >
+                        <div className={Styles.icon} />
+                    </div>
                 </div>
             </div>
             {/* extra space to force the last element have some gap */}

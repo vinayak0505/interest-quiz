@@ -96,16 +96,17 @@ const Start = ({ resume, onComplete, onClose }: { resume: boolean, onComplete: (
                     {
                         (state === STATE_START.START || state === STATE_START.RESUME) ?
                             (
-                                isMobile ?
-                                    <>
-                                        <div className={Styles.finaltext}>Help yourself by helping Olly reach the</div>
-                                        <div className={Styles.finaltextgradient2 + " " + Styles.finaltext}>planet where magic happens to discover</div>
-                                        <div className={Styles.finaltextgradient3 + " " + Styles.finaltext}>careers based on your interests</div>
-                                    </> :
-                                    <>
-                                        <div className={Styles.finaltext}>Help yourself by helping Olly reach the planet where magic</div>
-                                        <div className={Styles.finaltextgradient + " " + Styles.finaltext}>happens to discover careers based on your interests</div>
-                                    </>
+                                // isMobile ?
+                                //     <>
+                                //         <div className={Styles.finaltext}>Help yourself by helping Olly reach the</div>
+                                //         <div className={Styles.finaltextgradient2 + " " + Styles.finaltext}>planet where magic happens to discover</div>
+                                //         <div className={Styles.finaltextgradient3 + " " + Styles.finaltext}>careers based on your interests</div>
+                                //     </> :
+                                //     <>
+                                //         <div className={Styles.finaltext}>Help yourself by helping Olly reach the planet where magic</div>
+                                //         <div className={Styles.finaltextgradient + " " + Styles.finaltext}>happens to discover careers based on your interests</div>
+                                //     </>
+                                <div className={Styles.finaltext}>Help yourself by helping Olly reach the planet where magic happens to discover careers based on your interests</div>
                             )
                             :
                             <>
