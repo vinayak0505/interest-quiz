@@ -1,0 +1,96 @@
+// @use '../../utils/vairables' as var;
+
+.background {
+    --start-color: #85AFFF;
+    --end-color: #E52346;
+    position: relative;
+    overflow: hidden;
+    transition: --start-color 1.5s, --end-color 1.5s;
+    height: 100dvh;
+    width: 100vw;
+    background: linear-gradient(180deg, var(--start-color) 0%, var(--end-color) 100%);
+
+    .star {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 1;
+        background-position: center;
+        background-size: cover;
+        background-image: url(var.$aws-base-url + '/InterestBasedQuiz/starry-night-sky.png');
+    }
+
+    .clouds {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 1;
+        background-position: center;
+        background-size: cover;
+        background-image: url(var.$aws-base-url + '/InterestBasedQuiz/error_background.png');
+    }
+
+
+    .ovals {
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        padding: 0px 12px;
+
+        .item {
+            content: url(var.$aws-base-url + '/InterestBasedQuiz/SimeEllipse.png');
+        }
+    }
+
+    .container {
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100dvh;
+        width: 100vw;
+        position: absolute;
+        padding: 20px;
+        color: white;
+
+        .image {
+            width: 260.33px;
+            height: auto;
+        }
+
+        .heading {
+            font-family: Poppins;
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 55.8px;
+            letter-spacing: 0.025em;
+        }
+
+        .subheading {
+            font-family: Poppins;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 33.2px;
+        }
+
+        .button {
+            background-color: red;
+            max-width: 692px;
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 700px) {
+
+    .ovals {
+        justify-content: center;
+    }
+
+}

@@ -6,18 +6,20 @@ import React, { useEffect, useState } from "react";
 import { InterestBasedQuizTempData } from "./constants";
 
 import "./App.css";
+import InterestBasedError from "./InterestBasedQuiz/interest_based_error";
 
 enum STATE {
     START,
     RESUME,
     ONGOING,
     JUSTCOMPLETED,
-    COMPLETED
+    COMPLETED,
+    ERROR
 }
 
 const App = () => {
-    const [state, setState] = useState<STATE>(STATE.START);
-    // const [state, setState] = useState<STATE>(STATE.ONGOING);
+    // const [state, setState] = useState<STATE>(STATE.START);
+    const [state, setState] = useState<STATE>(STATE.ERROR);
 
     // useEffect(() => {
     //     const data = InterestBasedQuizTempData;
@@ -63,6 +65,9 @@ const App = () => {
     }
     if (state === STATE.COMPLETED) {
         return <Completed onExplore={onExplore}/>
+    }
+    if(state == STATE.ERROR) {
+        return <InterestBasedError/>
     }
     return <Start resume={state === STATE.RESUME} onComplete={onNext} onClose={onExit}/>;
 }
